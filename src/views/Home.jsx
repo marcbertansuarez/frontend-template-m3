@@ -3,13 +3,7 @@
 import React, {useState, useEffect} from 'react';
 import lineupService from '../services/lineupService';
 import { Link } from 'react-router-dom';
-
-function getYouTubeVideoId(url) {
-  const regex = /(?:v=|youtu\.be\/)([\w-]+)/;
-  const match = url.match(regex);
-  return match ? match[1] : null;
-}
-
+import getYouTubeVideoId from '../utils/getYoutubeVideoId';
 
 export default function Home() {
 
