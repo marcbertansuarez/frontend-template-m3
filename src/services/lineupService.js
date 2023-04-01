@@ -16,11 +16,11 @@ class LineUpService {
 //   }
 
 getLineUps() {
-    this.api.get('/').then(({ data }) => data).catch(err => console.error(err));
+    return this.api.get('/').then(({ data }) => data).catch(err => console.error(err));
 }
 
 getLineUp(id) {
-    this.api.get(`/${id}`).then(({ data }) => data).catch(err => console.error(err));
+    return this.api.get(`/${id}`).then(({ data }) => data).catch(err => console.error(err));
 }
 
 createLineUp(body) {
