@@ -1,14 +1,18 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import lineupService from "../services/lineupService";
-import { Link, useParams } from "react-router-dom";
+import reviewService from "../services/review.Service";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import getYouTubeVideoId from '../utils/getYoutubeVideoId';
+import { AuthContext } from "../context/AuthContext";
 
 export default function LineUpDetails() {
+  const { user } = useContext(AuthContext);
   const { lineupId } = useParams();
   const [lineup, setLineup] = useState({});
   const [reviews, setReviews] = useState([]);
+  const navigate = useNavigate();
 
   const getOneLineup = async () => {
     try {
@@ -19,11 +23,29 @@ export default function LineUpDetails() {
       console.log(error);
     }
   };
-
+  
   useEffect(() => {
     getOneLineup();
     // eslint-disable-next-line
   }, [lineupId]);
+
+  const handleDeleteLineup = async (lineupId) => {
+    try {
+      await lineupService.deleteLineUp(lineupId);
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleDeleteReview = async (reviewId, lineupId) => {
+    try {
+      await reviewService.deleteReview(reviewId);
+      navigate(`/lineup/${lineupId}`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div>
@@ -42,6 +64,7 @@ export default function LineUpDetails() {
               {lineup.author.username}
             </Link>
           )}
+          {user && user._id === lineup.author._id && <button onClick={() => handleDeleteLineup(lineup._id)}>Delete</button>}
         </div>
       )}
       <div>
@@ -53,6 +76,7 @@ export default function LineUpDetails() {
                 <Link to={`/profile/${review.userId._id}`}>
                   {review.userId.username}
                 </Link>
+                {user._id === review.userId && <button onClick={() => handleDeleteReview(review._id, review.lineupId)}>Delete</button>}
               </div>
             );
           })}
