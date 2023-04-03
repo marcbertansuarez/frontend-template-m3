@@ -64,7 +64,10 @@ export default function LineUpDetails() {
               {lineup.author.username}
             </Link>
           )}
-          {user && user._id === lineup.author._id && <button onClick={() => handleDeleteLineup(lineup._id)}>Delete</button>}
+          {user && user._id === lineup.author._id && <div>
+          <button onClick={() => handleDeleteLineup(lineup._id)}>Delete</button>
+          <Link to={`/lineup/${lineup._id}/edit`}>Edit</Link>
+          </div>}
         </div>
       )}
       <div>

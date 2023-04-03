@@ -10,6 +10,7 @@ import Login from './views/auth/Login';
 import PrivateView from './views/PrivateView';
 import IsPrivate from './components/IsPrivate';
 import LineUpDetails from './views/LineUpDetails';
+import LineUpEdit from './views/LineUpEdit';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/lineup/:lineupId" element={<LineUpDetails />} />
+        <Route path="lineup/:lineupId/edit" element={<LineUpEdit />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />

@@ -68,7 +68,11 @@ export default function Home() {
             <p>Likes: {elem.numberOfLikes}</p> 
             <Link to={`/profile/${elem.author._id}`}><p>{elem.author.username}</p></Link>
             <Link to={`/lineup/${elem._id}`}>See more</Link>
-            {user && user._id === elem.author._id && <button onClick={() => handleDelete(elem._id)}>Delete</button>}
+            {user && user._id === elem.author._id && (
+              <div>
+              <button onClick={() => handleDelete(elem._id)}>Delete</button>
+              <Link to={`/lineup/${elem._id}/edit`}>Edit</Link>
+              </div>)}
           </div>
         )
       })}
