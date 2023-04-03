@@ -77,6 +77,7 @@ export default function Home() {
         )
       })}
       </div>
+      {user && <Link to={'/lineup/create'}>Create new Line Up</Link>}
     </div>
   )
 }
