@@ -12,6 +12,7 @@ import IsPrivate from './components/IsPrivate';
 import LineUpDetails from './views/LineUpDetails';
 import LineUpEdit from './views/LineUpEdit';
 import NewLineUp from './views/NewLineUp';
+import ProfileView from './views/ProfileView';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/lineup/:lineupId" element={<LineUpDetails />} />
         <Route path="/lineup/:lineupId/edit" element={<LineUpEdit />} />
         <Route path="/lineup/create" element={<NewLineUp />} />
+        <Route path="/profile" element={<ProfileView />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
