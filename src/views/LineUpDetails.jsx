@@ -3,16 +3,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import lineupService from "../services/lineupService";
 import reviewService from "../services/review.Service";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import getYouTubeVideoId from '../utils/getYoutubeVideoId';
+import { useParams, useNavigate } from "react-router-dom";
+// import getYouTubeVideoId from '../utils/getYoutubeVideoId';
 import { AuthContext } from "../context/AuthContext";
+import LineUpCard from "../components/LineUpCard";
+import ReviewCard from "../components/ReviewCard";
 
 export default function LineUpDetails() {
   const { user } = useContext(AuthContext);
   const { lineupId } = useParams();
   const [lineup, setLineup] = useState({});
   const [reviews, setReviews] = useState([]);
-  const [newReview, setNewReview] = useState({});
+  const initialState = {
+    content: ''
+  }
+  const [newReview, setNewReview] = useState(initialState);
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate();
 
@@ -61,6 +66,7 @@ const handleReviewSubmit = async (e) => {
   try {
     await reviewService.createReview(lineupId, newReview);
     getOneLineup();
+    setNewReview(initialState)
   } catch (error) {
     console.log(error)
   }
@@ -70,44 +76,23 @@ const handleReviewSubmit = async (e) => {
     <div>
       {isLoading && <div>LOADING...</div>}
       {lineup && !isLoading && (
-        <div key={lineup._id}>
-          <h1>{lineup.title}</h1>
-          <h4>{lineup.agent}</h4>
-          <h4>{lineup.map}</h4>
-          <iframe
-            src={`https://www.youtube.com/embed/${getYouTubeVideoId(
-              lineup.video
-            )}`}
-          ></iframe>
-          {lineup.author && (
-            <Link to={`/profile/${lineup.author._id}`}>
-              {lineup.author.username}
-            </Link>
-          )}
-          {user && user._id === lineup.author._id && <div>
-          <button onClick={() => handleDeleteLineup(lineup._id)}>Delete</button>
-          <Link to={`/lineup/${lineup._id}/edit`}>Edit</Link>
-          </div>}
+        <div>
+          <LineUpCard key={lineup._id} lineup={lineup} handleDeleteLineup={handleDeleteLineup}/>
         </div>
       )}
       {user && <div>
         <form onSubmit={handleReviewSubmit}>
           <label>Add a new review for this lineup</label>
-          <input type="text" name="content" value={newReview.value} onChange={handleNewReview}/>
+          <input type="text" name="content" value={newReview.content} onChange={handleNewReview}/>
           <button type="submit">New review</button>
         </form>
       </div>}
       <div>
+      {reviews.length === 0 && <div>No reviews for this post yet</div>}
         {reviews &&
           reviews.map((review) => {
             return (
-              <div key={review._id}>
-                <p>{review.content}</p>
-                <Link to={`/profile/${review.userId._id}`}>
-                  {review.userId.username}
-                </Link>
-                {user._id === review.userId._id && <button onClick={() => handleDeleteReview(review._id, review.lineupId)}>Delete</button>}
-              </div>
+              <ReviewCard key={review._id} review={review} handleDeleteReview={handleDeleteReview}/>
             );
           })}
       </div>
