@@ -14,16 +14,19 @@ export default function Home() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [lineups, setLineups] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   
   const getLineups = async () => {
     try {
       const response = await lineupService.getLineUps();
       setLineups(response)
-      console.log(response)
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   }
+  console.log(lineups)
 
     useEffect(() => {
       getLineups()
@@ -53,8 +56,9 @@ export default function Home() {
   return (
     <div>
       <h1>Home</h1>
+      {isLoading && <div>LOADING...</div>}
       <div>
-      {lineups && lineups.map(elem => {
+      {lineups && !isLoading && lineups.map(elem => {
         return (
           <div key={elem._id}>
             <h1>{elem.title}</h1>

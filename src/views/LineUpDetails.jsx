@@ -12,6 +12,8 @@ export default function LineUpDetails() {
   const { lineupId } = useParams();
   const [lineup, setLineup] = useState({});
   const [reviews, setReviews] = useState([]);
+  const [newReview, setNewReview] = useState({});
+  const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate();
 
   const getOneLineup = async () => {
@@ -19,6 +21,7 @@ export default function LineUpDetails() {
       const response = await lineupService.getLineUp(lineupId);
       setLineup(response.lineup);
       setReviews(response.reviews);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -41,15 +44,32 @@ export default function LineUpDetails() {
   const handleDeleteReview = async (reviewId, lineupId) => {
     try {
       await reviewService.deleteReview(reviewId);
-      navigate(`/lineup/${lineupId}`)
+      getOneLineup();
     } catch (error) {
       console.log(error)
     }
   }
 
+  const handleNewReview = (e) => {
+    setNewReview({
+          [e.target.name]: e.target.value
+  })
+};
+
+const handleReviewSubmit = async (e) => {
+  e.preventDefault()
+  try {
+    await reviewService.createReview(lineupId, newReview);
+    getOneLineup();
+  } catch (error) {
+    console.log(error)
+  }
+}
+
   return (
     <div>
-      {lineup && (
+      {isLoading && <div>LOADING...</div>}
+      {lineup && !isLoading && (
         <div key={lineup._id}>
           <h1>{lineup.title}</h1>
           <h4>{lineup.agent}</h4>
@@ -70,6 +90,13 @@ export default function LineUpDetails() {
           </div>}
         </div>
       )}
+      {user && <div>
+        <form onSubmit={handleReviewSubmit}>
+          <label>Add a new review for this lineup</label>
+          <input type="text" name="content" value={newReview.value} onChange={handleNewReview}/>
+          <button type="submit">New review</button>
+        </form>
+      </div>}
       <div>
         {reviews &&
           reviews.map((review) => {
@@ -79,7 +106,7 @@ export default function LineUpDetails() {
                 <Link to={`/profile/${review.userId._id}`}>
                   {review.userId.username}
                 </Link>
-                {user._id === review.userId && <button onClick={() => handleDeleteReview(review._id, review.lineupId)}>Delete</button>}
+                {user._id === review.userId._id && <button onClick={() => handleDeleteReview(review._id, review.lineupId)}>Delete</button>}
               </div>
             );
           })}
