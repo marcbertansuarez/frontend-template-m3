@@ -2,7 +2,8 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React, { useState, useEffect, useContext } from "react";
 import lineupService from "../services/lineupService";
-import reviewService from "../services/review.Service";
+import reviewService from "../services/reviewService";
+import likeService from "../services/likeService";
 import { useParams, useNavigate } from "react-router-dom";
 // import getYouTubeVideoId from '../utils/getYoutubeVideoId';
 import { AuthContext } from "../context/AuthContext";
@@ -24,7 +25,7 @@ export default function LineUpDetails() {
   const getOneLineup = async () => {
     try {
       const response = await lineupService.getLineUp(lineupId);
-      setLineup(response.lineup);
+      setLineup(response.lineupLike);
       setReviews(response.reviews);
       setIsLoading(false);
     } catch (error) {
@@ -46,7 +47,19 @@ export default function LineUpDetails() {
     }
   }
 
-  const handleDeleteReview = async (reviewId, lineupId) => {
+  const handleLikes = async (lineupId) => {
+    if (!user) {
+      navigate('/login');
+    }
+    try {
+      await likeService.createLike(lineupId);
+      getOneLineup();
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const handleDeleteReview = async (reviewId) => {
     try {
       await reviewService.deleteReview(reviewId);
       getOneLineup();
@@ -72,12 +85,27 @@ const handleReviewSubmit = async (e) => {
   }
 }
 
+const handleSaveReview = async (reviewId, content) => {
+  try {
+    await reviewService.editReview(reviewId, content);
+    setReviews((prev) => {
+      return prev.map((review) => {
+        return (
+          review._id === reviewId ? {...review, content: content} : review
+        )
+      })
+    })
+  } catch (error) {
+    
+  }
+}
+
   return (
     <div>
       {isLoading && <div>LOADING...</div>}
       {lineup && !isLoading && (
         <div>
-          <LineUpCard key={lineup._id} lineup={lineup} handleDeleteLineup={handleDeleteLineup}/>
+          <LineUpCard key={lineup._id} lineup={lineup} handleDeleteLineup={handleDeleteLineup} handleLikes={handleLikes}/>
         </div>
       )}
       {user && <div>
@@ -92,7 +120,7 @@ const handleReviewSubmit = async (e) => {
         {reviews &&
           reviews.map((review) => {
             return (
-              <ReviewCard key={review._id} review={review} handleDeleteReview={handleDeleteReview}/>
+              <ReviewCard key={review._id} review={review} handleDeleteReview={handleDeleteReview} handleSaveReview={handleSaveReview}/>
             );
           })}
       </div>

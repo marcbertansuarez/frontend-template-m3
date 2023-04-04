@@ -4,9 +4,12 @@ import React, {useContext} from 'react';
 import getYouTubeVideoId from '../utils/getYoutubeVideoId';
 import { AuthContext } from "../context/AuthContext";
 import { Link } from 'react-router-dom';
+import { AiFillHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 
-export default function LineUpCard({lineup, handleDeleteLineup}) {
+export default function LineUpCard({lineup, handleDeleteLineup, handleLikes}) {
     const { user } = useContext(AuthContext)
+    console.log(lineup)
     return (
         <div>
           <h1>{lineup.title}</h1>
@@ -17,6 +20,8 @@ export default function LineUpCard({lineup, handleDeleteLineup}) {
               lineup.video
             )}`}
           ></iframe>
+          <form onClick={() => handleLikes(lineup._id)}>{lineup.isLiked ? <AiFillHeart size={20} color="red" /> : <AiOutlineHeart size={20}/>}</form>
+            <p>Likes: {lineup.numberOfLikes}</p>
           {lineup.author && (
             <Link to={`/profile/${lineup.author._id}`}>
               {lineup.author.username}

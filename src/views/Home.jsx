@@ -21,6 +21,7 @@ export default function Home() {
     try {
       const response = await lineupService.getLineUps();
       setLineups(response)
+      console.log(response)
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -38,6 +39,7 @@ export default function Home() {
       }
       try {
         await likeService.createLike(lineupId);
+        getLineups();
       } catch (error) {
         console.log(error)
       }

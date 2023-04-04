@@ -20,7 +20,7 @@ createReview(lineupId, body) {
   }
 
 editReview(id, body) {
-    return this.api.put(`/${id}`, body).then(({ data }) => data).catch(err => console.error(err));
+    return this.api.put(`/${id}`, {content: body}).then(({ data }) => data).catch(err => console.error(err));
 }
 
 deleteReview(id) {
