@@ -22,6 +22,11 @@ getProfile() {
 getProfileLiked() {
     return this.api.get('/liked').then(({ data }) => data).catch(err => console.error(err));
 }
+
+editProfile(body) {
+    return this.api.put(`/edit`, body).then(({ data }) => data).catch(err => console.error(err));
+}
+
 }
 const profileService = new ProfileService();
 

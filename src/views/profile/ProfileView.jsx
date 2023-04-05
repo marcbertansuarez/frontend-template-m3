@@ -64,6 +64,7 @@ export default function ProfileView() {
         <h3>{profile.username}</h3>
         <img style={{width: "20px"}} src={profile.image} alt={profile.username} />
       </div>}
+      <Link to="/profile/edit">Edit profile</Link>
       <Link to="/profile/liked">Liked LineUps</Link>
       <div>
       {lineups && !isLoading && lineups.map(elem => {
