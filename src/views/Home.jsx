@@ -8,6 +8,7 @@ import getYouTubeVideoId from '../utils/getYoutubeVideoId';
 import { AuthContext } from '../context/AuthContext';
 import { AiFillHeart } from 'react-icons/ai';
 import { AiOutlineHeart } from 'react-icons/ai';
+import getAgentImage from '../utils/getAgentImage';
 
 export default function Home() {
 
@@ -64,7 +65,10 @@ export default function Home() {
         return (
           <div key={elem._id}>
             <h1>{elem.title}</h1>
+            <div>
+            <img style={{width: "40px"}} src={getAgentImage(elem.agent)} alt={elem.agent} />
             <h4>{elem.agent}</h4>
+            </div>
             <h4>{elem.map}</h4>
             <iframe src={`https://www.youtube.com/embed/${getYouTubeVideoId(
                     elem.video
@@ -72,7 +76,7 @@ export default function Home() {
             
             <form onClick={() => handleLikes(elem._id)}>{elem.isLiked ? <AiFillHeart size={20} color="red" /> : <AiOutlineHeart size={20}/>}</form>
             <p>Likes: {elem.numberOfLikes}</p> 
-            <Link to={`/profile/${elem.author._id}`}><p>{elem.author.username}</p></Link>
+            <Link to={`/profile/${elem.author._id}`}>{elem.author.username}</Link>
             <Link to={`/lineup/${elem._id}`}>See more</Link>
             {user && user._id === elem.author._id && (
               <div>

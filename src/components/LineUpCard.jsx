@@ -6,6 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 import { Link } from 'react-router-dom';
 import { AiFillHeart } from 'react-icons/ai';
 import { AiOutlineHeart } from 'react-icons/ai';
+import getAgentImage from '../utils/getAgentImage';
 
 export default function LineUpCard({lineup, handleDeleteLineup, handleLikes}) {
     const { user } = useContext(AuthContext)
@@ -13,7 +14,10 @@ export default function LineUpCard({lineup, handleDeleteLineup, handleLikes}) {
     return (
         <div>
           <h1>{lineup.title}</h1>
+          <div>
+          <img style={{width: "40px"}} src={getAgentImage(lineup.agent)} alt={lineup.agent} />
           <h4>{lineup.agent}</h4>
+          </div>
           <h4>{lineup.map}</h4>
           <iframe
             src={`https://www.youtube.com/embed/${getYouTubeVideoId(

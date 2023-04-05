@@ -8,6 +8,7 @@ import getYouTubeVideoId from '../../utils/getYoutubeVideoId';
 import { AuthContext } from '../../context/AuthContext';
 import { AiFillHeart } from 'react-icons/ai';
 import { AiOutlineHeart } from 'react-icons/ai';
+import getAgentImage from '../../utils/getAgentImage';
 
 export default function ProfileLikedView() {
 
@@ -23,7 +24,6 @@ export default function ProfileLikedView() {
       const response = await profileService.getProfileLiked();
       setProfile(response.user)
       setLineups(response.likedLineUps)
-      console.log(response.user)
       console.log(response.likedLineUps)
       setIsLoading(false);
     } catch (error) {
@@ -57,11 +57,15 @@ export default function ProfileLikedView() {
         <img style={{width: "20px"}} src={profile.image} alt={profile.username} />
       </div>}
       <div>
+      {lineups.length === 0 && <div>No lineup's liked</div>}
       {lineups && !isLoading && lineups.map(elem => {
         return (
           <div key={elem._id}>
             <h1>{elem.title}</h1>
-            <h4>{elem.agent}</h4>
+            <div>
+            <img style={{width: "40px"}} src={getAgentImage(elem.agent)} alt={elem.agent} />
+                <h4>{elem.agent}</h4>
+            </div>
             <h4>{elem.map}</h4>
             <iframe src={`https://www.youtube.com/embed/${getYouTubeVideoId(
                     elem.video
@@ -69,7 +73,7 @@ export default function ProfileLikedView() {
             
             <form onClick={() => handleLikes(elem._id)}>{elem.isLiked ? <AiFillHeart size={20} color="red" /> : <AiOutlineHeart size={20}/>}</form>
             <p>Likes: {elem.numberOfLikes}</p> 
-            {/* <Link to={`/profile/${elem.author._id}`}><p>{elem.author.username}</p></Link> */}
+            <Link to={`/profile/${elem.author._id}`}>{elem.author.username}</Link>
             <Link to={`/lineup/${elem._id}`}>See more</Link>
           </div>
         )

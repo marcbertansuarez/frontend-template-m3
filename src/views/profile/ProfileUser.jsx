@@ -8,6 +8,7 @@ import getYouTubeVideoId from '../../utils/getYoutubeVideoId';
 import { AuthContext } from '../../context/AuthContext';
 import { AiFillHeart } from 'react-icons/ai';
 import { AiOutlineHeart } from 'react-icons/ai';
+import getAgentImage from '../../utils/getAgentImage';
 
 export default function ProfileUser() {
 
@@ -61,7 +62,10 @@ export default function ProfileUser() {
         return (
           <div key={elem._id}>
             <h1>{elem.title}</h1>
-            <h4>{elem.agent}</h4>
+            <div>
+                <img style={{width: "40px"}} src={getAgentImage(elem.agent)} alt={elem.agent} />
+                <h4>{elem.agent}</h4>
+            </div>
             <h4>{elem.map}</h4>
             <iframe src={`https://www.youtube.com/embed/${getYouTubeVideoId(
                     elem.video
