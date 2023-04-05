@@ -10,6 +10,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { AiFillHeart } from 'react-icons/ai';
 import { AiOutlineHeart } from 'react-icons/ai';
 import getAgentImage from '../../utils/getAgentImage';
+import getMapImage from '../../utils/getMapImage';
 
 export default function ProfileView() {
 
@@ -76,7 +77,10 @@ export default function ProfileView() {
             <img style={{width: "40px"}} src={getAgentImage(elem.agent)} alt={elem.agent} />
             <h4>{elem.agent}</h4>
             </div>
+            <div>
+            <img style={{width: "250px"}} src={getMapImage(elem.map)} alt={elem.map} />
             <h4>{elem.map}</h4>
+            </div>
             <iframe src={`https://www.youtube.com/embed/${getYouTubeVideoId(
                     elem.video
                   )}`}></iframe>
