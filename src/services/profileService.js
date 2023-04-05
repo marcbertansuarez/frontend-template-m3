@@ -23,6 +23,10 @@ getProfileLiked() {
     return this.api.get('/liked').then(({ data }) => data).catch(err => console.error(err));
 }
 
+getProfileUser(id) {
+    return this.api.get(`${id}`).then(({ data }) => data).catch(err => console.error(err));
+  }
+
 editProfile(body) {
     return this.api.put(`/edit`, body).then(({ data }) => data).catch(err => console.error(err));
 }

@@ -15,6 +15,7 @@ import NewLineUp from './views/lineups/NewLineUp';
 import ProfileView from './views/profile/ProfileView';
 import ProfileLikedView from './views/profile/ProfileLikedView';
 import ProfileEdit from './views/profile/ProfileEdit';
+import ProfileUser from './views/profile/ProfileUser';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/profile" element={<ProfileView />} />
         <Route path="/profile/liked" element={<ProfileLikedView />} />
         <Route path="/profile/edit" element={<ProfileEdit />} />
+        <Route path="/profile/:userId" element={<ProfileUser />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
