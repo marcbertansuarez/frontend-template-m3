@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React, {useState, useEffect, useContext} from 'react';
-import profileService from '../services/profileService';
-import lineupService from '../services/lineupService';
-import likeService from '../services/likeService';
+import profileService from '../../services/profileService';
+import lineupService from '../../services/lineupService';
+import likeService from '../../services/likeService';
 import { Link, useNavigate } from 'react-router-dom';
-import getYouTubeVideoId from '../utils/getYoutubeVideoId';
-import { AuthContext } from '../context/AuthContext';
+import getYouTubeVideoId from '../../utils/getYoutubeVideoId';
+import { AuthContext } from '../../context/AuthContext';
 import { AiFillHeart } from 'react-icons/ai';
 import { AiOutlineHeart } from 'react-icons/ai';
 
@@ -62,8 +62,9 @@ export default function ProfileView() {
       {isLoading && <div>LOADING...</div>}
       {profile && <div>
         <h3>{profile.username}</h3>
-        <img src={profile.image} alt={profile.username} />
+        <img style={{width: "20px"}} src={profile.image} alt={profile.username} />
       </div>}
+      <Link to="/profile/liked">Liked LineUps</Link>
       <div>
       {lineups && !isLoading && lineups.map(elem => {
         return (

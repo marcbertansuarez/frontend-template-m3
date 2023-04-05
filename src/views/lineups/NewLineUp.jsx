@@ -1,41 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import lineupService from '../services/lineupService';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import lineupService from '../../services/lineupService';
 
-export default function LineUpEdit() {
+export default function NewLineUp() {
 
-    const { lineupId } = useParams();
-
-    const [lineup, setLineup] = useState({
+    const initalState = {
         title: '',
         agent: '',
         map: '',
         description: '',
-        video: ''
-    });
+        video: '' 
+    }
+
+    const [newLineup, setNewLineup] = useState(initalState);
 
     const agents = ['Astra', 'Breach', 'Brimstone', 'Chamber', 'Cypher', 'Fade', 'Guekko', 'Harbor', 'Jett', 'KAY/O', 'Killjoy', 'Neon', 'Omen', 'Phoenix', 'Raze', 'Reyna', 'Sage', 'Skye', 'Sova', 'Viper', 'Yoru'];
     const maps = ['Bind', 'Haven', 'Split', 'Ascent', 'Icebox', 'Breeze', 'Fracture', 'Pearl', 'Lotus']
 
     const navigate = useNavigate();
 
-    const getLineup = async () => {
-        try {
-            const response = await lineupService.getLineUp(lineupId);
-            setLineup(response.lineup);
-        } catch (error) {
-            console.log(error);
-        }
-    } 
-    console.log(lineup)
-
-    useEffect(() => {
-        getLineup()
-        // eslint-disable-next-line
-    }, [lineupId]);
 
     const handleChange = (e) => {
-        setLineup(prev => {
+        setNewLineup(prev => {
             return {
                 ...prev,
                 [e.target.name]: e.target.value
@@ -46,8 +32,8 @@ export default function LineUpEdit() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            await lineupService.editLineUp(lineupId, lineup);
-            navigate(`/lineup/${lineupId}`)
+            const createdLineup = await lineupService.createLineUp(newLineup)
+            navigate(`/lineup/${createdLineup._id}`)
         } catch (error) {
             console.log(error)
         }
@@ -56,12 +42,12 @@ export default function LineUpEdit() {
 
     return (
         <div>
-            <h2>Editing {lineup.title}</h2>
+            <h2>Create new LineUp</h2>
             <form onSubmit={handleSubmit}>
                 <label>Title</label>
-                <input type="text" name="title" value={lineup.title} onChange={handleChange}/>
+                <input type="text" name="title" value={newLineup.title} onChange={handleChange}/>
                 <label>Agent</label>
-                <select name="agent" onChange={handleChange} value={lineup.agent} >
+                <select name="agent" onChange={handleChange} value={newLineup.agent} >
                 {agents.map(agent => {
                     return (
                         <option key={agent} value={agent}>{agent}</option>
@@ -69,7 +55,7 @@ export default function LineUpEdit() {
                 })}
                 </select>
                 <label>Map</label>
-                <select name="map" onChange={handleChange} value={lineup.map}>
+                <select name="map" onChange={handleChange} value={newLineup.map}>
                     {maps.map(map => {
                         return (
                             <option key={map} value={map}>{map}</option>
@@ -77,10 +63,10 @@ export default function LineUpEdit() {
                     })}
                 </select>
                 <label>Description</label>
-                <input type="text" name="description" value={lineup.description} onChange={handleChange}/>
+                <input type="text" name="description" value={newLineup.description} onChange={handleChange}/>
                 <label>Video url</label>
-                <input type="text" name="video" value={lineup.video} onChange={handleChange}/>
-                <button type="submit">Submit changes</button>
+                <input type="text" name="video" value={newLineup.video} onChange={handleChange}/>
+                <button type="submit">Create lineup</button>
             </form>
         </div>
     )

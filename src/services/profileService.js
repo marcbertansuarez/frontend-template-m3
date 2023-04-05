@@ -19,7 +19,9 @@ getProfile() {
     return this.api.get('/').then(({ data }) => data).catch(err => console.error(err));
   }
 
-
+getProfileLiked() {
+    return this.api.get('/liked').then(({ data }) => data).catch(err => console.error(err));
+}
 }
 const profileService = new ProfileService();
 

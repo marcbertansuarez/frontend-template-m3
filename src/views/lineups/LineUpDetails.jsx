@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React, { useState, useEffect, useContext } from "react";
-import lineupService from "../services/lineupService";
-import reviewService from "../services/reviewService";
-import likeService from "../services/likeService";
+import lineupService from "../../services/lineupService";
+import reviewService from "../../services/reviewService";
+import likeService from "../../services/likeService";
 import { useParams, useNavigate } from "react-router-dom";
 // import getYouTubeVideoId from '../utils/getYoutubeVideoId';
-import { AuthContext } from "../context/AuthContext";
-import LineUpCard from "../components/LineUpCard";
-import ReviewCard from "../components/ReviewCard";
+import { AuthContext } from "../../context/AuthContext";
+import LineUpCard from "../../components/LineUpCard";
+import ReviewCard from "../../components/ReviewCard";
 
 export default function LineUpDetails() {
   const { user } = useContext(AuthContext);
