@@ -81,7 +81,7 @@ export default function Home() {
             
             <form onClick={() => handleLikes(elem._id)}>{elem.isLiked ? <AiFillHeart size={20} color="red" /> : <AiOutlineHeart size={20}/>}</form>
             <p>Likes: {elem.numberOfLikes}</p> 
-            <Link to={`/profile/${elem.author._id}`}>{elem.author.username}</Link>
+            <Link to={user ? `/profile/${elem.author._id}` : '/login' }>{elem.author.username}</Link>
             <Link to={`/lineup/${elem._id}`}>See more</Link>
             {user && user._id === elem.author._id && (
               <div>

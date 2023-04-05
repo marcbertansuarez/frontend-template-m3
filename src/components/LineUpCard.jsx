@@ -11,7 +11,6 @@ import getMapImage from '../utils/getMapImage';
 
 export default function LineUpCard({lineup, handleDeleteLineup, handleLikes}) {
     const { user } = useContext(AuthContext)
-    console.log(lineup)
     return (
         <div>
           <h1>{lineup.title}</h1>
@@ -31,7 +30,7 @@ export default function LineUpCard({lineup, handleDeleteLineup, handleLikes}) {
           <form onClick={() => handleLikes(lineup._id)}>{lineup.isLiked ? <AiFillHeart size={20} color="red" /> : <AiOutlineHeart size={20}/>}</form>
             <p>Likes: {lineup.numberOfLikes}</p>
           {lineup.author && (
-            <Link to={`/profile/${lineup.author._id}`}>
+            <Link to={user ? `/profile/${lineup.author._id}` : '/login' }>
               {lineup.author.username}
             </Link>
           )}
