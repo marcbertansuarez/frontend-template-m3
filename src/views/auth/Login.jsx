@@ -7,7 +7,7 @@ import authService from '../../services/authService';
 export default function Login() {
   const { storeToken, authenticateUser, isLoggedIn } = useAuth(); 
   const [user, setUser] = useState({
-    email: '',
+    usernameOrEmail: '',
     password: ''
   });
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -50,8 +50,8 @@ export default function Login() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input required type="email" name="email" value={user.email} onChange={handleChange} />
+        <label>Username or Email</label>
+        <input required type="text" name="usernameOrEmail" value={user.usernameOrEmail} onChange={handleChange} />
         <label>Password</label>
         <input required type="password" name="password" value={user.password} onChange={handleChange} />
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
