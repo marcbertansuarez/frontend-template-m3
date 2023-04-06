@@ -27,8 +27,13 @@ getProfileUser(id) {
     return this.api.get(`${id}`).then(({ data }) => data).catch(err => console.error(err));
   }
 
-editProfile(body) {
-    return this.api.put(`/edit`, body).then(({ data }) => data).catch(err => console.error(err));
+editProfile(formData) {
+    const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+    return this.api.put(`/edit`, formData, config).then(({ data }) => data).catch(err => console.error(err));
 }
 
 }

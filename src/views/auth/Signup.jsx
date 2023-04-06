@@ -9,6 +9,7 @@ export default function Signup() {
   })
   const [password, setPassword] = useState('');
   const [passwordControl, setPasswordControl] = useState('');
+  const [image, setImage] = useState('')
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
 
@@ -21,6 +22,12 @@ export default function Signup() {
     })
   }
 
+  const handleImage = async (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
   useEffect(() => {
     if (password !== passwordControl) {
       setErrorMessage("Passwords don't match")
@@ -31,8 +38,15 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('username', user.username);
+    formData.append('email', user.email);
+    formData.append('password', password);
+    if (image) {
+      formData.append('image', image);
+    }
     try {
-      await authService.signup({ username: user.username, email: user.email, password });
+      await authService.signup(formData);
       navigate('/login');
     } catch (error) {
       console.error(error)
@@ -42,7 +56,7 @@ export default function Signup() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>Username</label>
         <input required type="text" name="username" value={user.username} onChange={handleChange} />
         <label>Email</label>
@@ -52,6 +66,8 @@ export default function Signup() {
         <label>Repeat the password</label>
         <input required type="password" name="passwordControl" value={passwordControl} onChange={(e) => setPasswordControl(e.target.value)} />
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        <label>Profile Picture</label>
+        <input type="file" name="image" onChange={handleImage} accept="image/*" />
         <button type="submit">Register</button>
       </form>
     </div>

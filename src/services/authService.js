@@ -15,8 +15,13 @@ class AuthService {
     });
   }
 
-  signup(body) {
-    return this.api.post('/signup', body).then(({ data }) => data);
+  signup(formData) {
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+    return this.api.post('/signup', formData, config).then(({ data }) => data);
   }
 
   login(user) {

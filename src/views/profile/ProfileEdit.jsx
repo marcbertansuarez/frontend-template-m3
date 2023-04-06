@@ -34,10 +34,26 @@ export default function ProfileEdit() {
         })
     };
 
+    const handleImage = (e) => {
+        if (e.target.files[0]) {
+          setProfile((prev) => {
+            return {
+              ...prev,
+              image: e.target.files[0]
+            };
+          });
+        }
+      };
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const formData = new FormData();
+        formData.append('username', profile.username);
+        if (profile.image) {
+        formData.append('image', profile.image);
+    }
         try {
-            await profileService.editProfile(profile)
+            await profileService.editProfile(formData)
             navigate('/profile');
         } catch (error) {
             console.log(error)
@@ -49,11 +65,11 @@ export default function ProfileEdit() {
         {isLoading && <div>LOADING...</div>}
         <div>
             <h2>Editing {profile.username}</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <label>Update username</label>
                 <input type="text" name="username" value={profile.username} onChange={handleChange}/>
                 <label>Update image</label>
-                <input type="text" name="image" value={profile.image} onChange={handleChange}/>
+                <input type="file" name="image" onChange={handleImage} accept="image/*"/>
                 <button type="submit">Edit profile</button>
             </form>
         </div>
