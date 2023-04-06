@@ -17,8 +17,10 @@ import ProfileLikedView from './views/profile/ProfileLikedView';
 import ProfileEdit from './views/profile/ProfileEdit';
 import ProfileUser from './views/profile/ProfileUser';
 import TrackerView from './views/TrackerView';
-import AgentsView from './views/AgentsView';
-import AgentView from './views/AgentView';
+import AgentsView from './views/agents/AgentsView';
+import AgentView from './views/agents/AgentView';
+import MapsView from './views/maps/MapsView';
+import MapView from './views/maps/MapView';
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
         <Route path="/tracker" element={<TrackerView />} />
         <Route path="/agents" element={<AgentsView />} />
         <Route path="/agents/:agentId" element={<AgentView />} />
+        <Route path="/maps" element={<MapsView />} />
+        <Route path="/maps/:mapId" element={<MapView />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />

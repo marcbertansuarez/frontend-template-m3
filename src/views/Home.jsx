@@ -23,13 +23,11 @@ export default function Home() {
     try {
       const response = await lineupService.getLineUps();
       setLineups(response)
-      console.log(response)
       setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   }
-  console.log(lineups)
 
     useEffect(() => {
       getLineups()

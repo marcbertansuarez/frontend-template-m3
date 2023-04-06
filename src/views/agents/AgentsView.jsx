@@ -11,7 +11,6 @@ export default function AgentsView() {
         try {
             const response = await axios.get('https://valorant-api.com/v1/agents?isPlayableCharacter=true')
             setAgents(response.data.data)
-            console.log(response.data.data)
             setIsLoading(false)
         } catch (error) {
             console.log(error)
