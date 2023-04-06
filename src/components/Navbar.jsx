@@ -13,6 +13,7 @@ export default function Navbar() {
         {!isLoggedIn && <li><NavLink to="/signup">Sign up</NavLink></li>}
         {!isLoggedIn && <li><NavLink to="/login">Login</NavLink></li>}
         <li><NavLink to="/tracker">Tracker Player</NavLink></li>
+        <li><NavLink to="/agents">Valorant Agents</NavLink></li>
         {isLoggedIn && <li><NavLink to="/profile">Profile</NavLink></li>}
         {isLoggedIn && <li><NavLink to="/private">Private view</NavLink></li>}
         {isLoggedIn && <li><button onClick={() => logOutUser()}>Log out</button></li>}
