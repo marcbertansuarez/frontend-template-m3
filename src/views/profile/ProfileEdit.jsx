@@ -1,11 +1,13 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { AuthContext } from "../../context/AuthContext";
+import React, { useState, useEffect } from 'react';
 import profileService from '../../services/profileService';
 import { useNavigate } from 'react-router-dom';
 export default function ProfileEdit() {
-    const { user } = useContext(AuthContext);
-    console.log(user)
-    const [profile, setProfile] = useState({})
+    
+
+    const [profile, setProfile] = useState({
+        username: '',
+        image: ''
+    })
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
