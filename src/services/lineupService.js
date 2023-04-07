@@ -32,8 +32,12 @@ editLineUp(id, body) {
 }
 
 deleteLineUp(id) {
-  
     return this.api.delete(`/${id}`).then(({ data }) => data).catch(err => console.error(err));
+}
+
+searchLineUp(search) {
+  console.log('Calling searchLineUp service')
+  return this.api.get(`/search?agent=${search}`).then(({ data }) => data).catch(err => console.error(err));
 }
   
 }

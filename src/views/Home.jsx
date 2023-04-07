@@ -16,6 +16,7 @@ export default function Home() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [lineups, setLineups] = useState([]);
+  const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   
@@ -52,6 +53,28 @@ export default function Home() {
       } catch (error) {
         console.log(error)
       }
+    };
+
+    const handleChange = (e) => {
+      setSearch(e.target.value);
+    }
+
+    const handleSubmitSearch = async (e) => {
+      setIsLoading(true);
+      e.preventDefault();
+      try {
+        const response = await lineupService.searchLineUp(search);
+        setLineups(response);
+        console.log('Search response:', response)
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error)
+      }
+    };
+
+    const handleClearSearch = async () => {
+      setSearch('')
+      getLineups();
     }
 
     
@@ -60,6 +83,12 @@ export default function Home() {
       <h1>Home</h1>
       {isLoading && <div>LOADING...</div>}
       <div>
+      <form onSubmit={handleSubmitSearch}>
+        <label>Search lineups</label>
+        <input type="text" name="agent" onChange={handleChange} />
+        <button type="submit">Search</button>
+        <button type="button" onClick={handleClearSearch}>Clear search</button>
+      </form>
       {lineups && !isLoading && lineups.map(elem => {
         return (
           <div key={elem._id}>
