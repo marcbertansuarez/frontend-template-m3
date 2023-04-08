@@ -6,7 +6,6 @@ export default function ReviewCard({review, handleDeleteReview, handleSaveReview
     const { user } = useContext(AuthContext);
     const [isEditing, setIsEditing] = useState(false);
     const [editedReview, setEditedReview] = useState(review.content)
-    console.log(isEditing)
 
     return (
         <div>

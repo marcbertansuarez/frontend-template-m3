@@ -65,7 +65,6 @@ export default function Home() {
       try {
         const response = await lineupService.searchLineUp(search);
         setLineups(response);
-        console.log('Search response:', response)
         setIsLoading(false);
       } catch (error) {
         console.log(error)
@@ -101,7 +100,6 @@ export default function Home() {
             <img style={{width: "250px"}} src={getMapImage(elem.map)} alt={elem.map} />
             <h4>{elem.map}</h4>
             </div>
-            <h4>{elem.map}</h4>
             <iframe src={`https://www.youtube.com/embed/${getYouTubeVideoId(
                     elem.video
                   )}`}></iframe>

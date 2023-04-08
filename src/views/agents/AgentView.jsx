@@ -12,7 +12,6 @@ export default function AgentView() {
         try {
             const response = await axios.get(`https://valorant-api.com/v1/agents/${agentId}`)
             setAgent(response.data.data)
-            console.log(response.data.data)
             setIsLoading(false)
         } catch (error) {
             console.log(error)
@@ -23,12 +22,13 @@ export default function AgentView() {
         getAgent()
         // eslint-disable-next-line
     }, [agentId]);
-
+    console.log(agent.uuid)
     
     return (
         <div>
         {isLoading && <div>LOADING...</div>}
         {agent && <div key={agent.uuid}>
+        <div>
             <h3>{agent.displayName}</h3>
             <p>{agent.role && agent.role.displayName}</p>
             <audio
@@ -54,6 +54,7 @@ export default function AgentView() {
                     )
                 })}
             </div>
+        </div>
         </div>}
         </div>
     

@@ -1,3 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400;500;900&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
 .active {
   color: green;
 }
+
+.general-nav img{
+  margin-top: 18px;
+  margin-left: 10px;
+  /* position: fixed; */
+
+}
+
+.navbar {
+  position: relative;
+}
+
+.navbar .toggle {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+.menu-nav {
+  list-style: none;
+  position: fixed;
+  background: #fff;
+  right: 0;
+  width: 0;
+  overflow: hidden;
+  max-width: 290px;
+  z-index: 9;
+  font-size: 18px;
+  box-shadow: 0 10px 15px -3px rgb(46 41 51 / 8%), 0 4px 6px -2px rgb(71 63 79 / 16%);
+  transform: translateX(100px);
+  transition: transform ease-in-out 0.2s;
+  margin-top: 30px;
+  /* transition: width ease 0.2s; */
+}
+.menu-nav.show-menu {
+  width: 100%;
+  transform: translateX(0px);
+}
+
+/* .menu-nav li a, .menu-nav li span {
+  display: block;
+  padding: 1rem;
+} */
+/* body {
+  background-image: url('./images/blob-scene-haikei.png');
+  background-size: contain;
+} */

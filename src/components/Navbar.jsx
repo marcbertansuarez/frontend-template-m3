@@ -1,25 +1,48 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import logo from '../images/logo.png';
+import { MdClose } from 'react-icons/md';
+import { FiMenu } from 'react-icons/fi';
+
 
 export default function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext); 
   const navigate = useNavigate();
+  const [navbarOpen, setNavbarOpen] = useState(false);
+
   return (
-    <div>
-      {user && <p>Hello {user.username}</p> }
-      <ul>
-        <li><NavLink to="/">Home</NavLink></li>
-        {!isLoggedIn && <li><NavLink to="/signup">Sign up</NavLink></li>}
-        {!isLoggedIn && <li><NavLink to="/login">Login</NavLink></li>}
-        <li><NavLink to="/tracker">Tracker Player</NavLink></li>
-        <li><NavLink to="/agents">Valorant Agents</NavLink></li>
-        <li><NavLink to="/maps">Valorant Maps</NavLink></li>
-        {isLoggedIn && <li><NavLink to="/profile">Profile</NavLink></li>}
-        {isLoggedIn && <li><NavLink to="/private">Private view</NavLink></li>}
-        {isLoggedIn && <li><button onClick={() => logOutUser()}>Log out</button></li>}
+    <div className="general-nav">
+      <img style={{width: "60px"}} src={logo} alt="ValoVision" />
+      <div className="navbar">
+      <button className="toggle" onClick={() => setNavbarOpen((prev) => !prev)}>
+          {navbarOpen ? (
+        <MdClose style={{ width: '32px', height: '32px' }} />
+      ) : (
+        <FiMenu
+          style={{
+            width: '32px',
+            height: '32px',
+          }}
+        />
+      )}
+      </button>
+      <ul className={`menu-nav${navbarOpen ? ' show-menu' : ''}`}>
+        <li><NavLink to="/" onClick={() => setNavbarOpen(false)}>Home</NavLink></li>
+        {!isLoggedIn && <li><NavLink to="/signup" onClick={() => setNavbarOpen(false)}>Sign up</NavLink></li>}
+        {!isLoggedIn && <li><NavLink to="/login" onClick={() => setNavbarOpen(false)}>Login</NavLink></li>}
+        <li><NavLink to="/tracker" onClick={() => setNavbarOpen(false)}>Tracker Player</NavLink></li>
+        <li><NavLink to="/agents" onClick={() => setNavbarOpen(false)}>Valorant Agents</NavLink></li>
+        <li><NavLink to="/maps" onClick={() => setNavbarOpen(false)}>Valorant Maps</NavLink></li>
+        {isLoggedIn && <li><NavLink to="/profile" onClick={() => setNavbarOpen(false)}>Profile</NavLink></li>}
+        {/* {isLoggedIn && <li><NavLink to="/private">Private view</NavLink></li>} */}
+        {isLoggedIn && <li><button onClick={() => {
+          logOutUser() 
+          setNavbarOpen(false)}}>Log out</button></li>}
         <li><button onClick={() => navigate(-1)}>Go back</button></li>
       </ul>
+      {user && <p>Hello {user.username}</p> }
+      </div>
     </div>
   )
 }
