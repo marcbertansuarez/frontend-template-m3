@@ -9,6 +9,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import LineUpCard from "../../components/LineUpCard";
 import ReviewCard from "../../components/ReviewCard";
+import Loading from "../../components/Loading";
 
 export default function LineUpDetails() {
   const { user } = useContext(AuthContext);
@@ -102,7 +103,7 @@ const handleSaveReview = async (reviewId, content) => {
 
   return (
     <div>
-      {isLoading && <div>LOADING...</div>}
+      {isLoading && <Loading />}
       {lineup && !isLoading && (
         <div>
           <LineUpCard key={lineup._id} lineup={lineup} handleDeleteLineup={handleDeleteLineup} handleLikes={handleLikes}/>
@@ -110,7 +111,7 @@ const handleSaveReview = async (reviewId, content) => {
       )}
       <div className="review">
       <div className="reviews">
-      {reviews.length === 0 && lineup && <div>No reviews for this post yet</div>}
+      {reviews.length === 0 && lineup && !isLoading && <div>No reviews for this post yet</div>}
         {reviews &&
           reviews.map((review) => {
             return (
@@ -118,7 +119,7 @@ const handleSaveReview = async (reviewId, content) => {
             );
           })}
           </div>
-          {user && lineup &&
+          {user && lineup && !isLoading &&
         <form className="new-review" onSubmit={handleReviewSubmit}>
           <label>Add a new review</label>
           <input type="text" name="content" value={newReview.content} onChange={handleNewReview}/>

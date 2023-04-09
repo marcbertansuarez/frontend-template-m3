@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
+import Loading from '../../components/Loading';
 
 export default function AgentView() {
 
@@ -26,7 +27,7 @@ export default function AgentView() {
     
     return (
         <div>
-        {isLoading && <div>LOADING...</div>}
+        {isLoading && <Loading />}
         {agent && <div key={agent.uuid}>
         <div>
             <h3>{agent.displayName}</h3>

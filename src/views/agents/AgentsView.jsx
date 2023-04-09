@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Loading from '../../components/Loading';
 
 export default function AgentsView() {
 
@@ -24,7 +25,7 @@ export default function AgentsView() {
     
     return (
         <div>
-        {isLoading && <div>LOADING...</div>}
+        {isLoading && <Loading />}
         {agents && agents.map(agent => {
             return (
                 <div key={agent.uuid}>

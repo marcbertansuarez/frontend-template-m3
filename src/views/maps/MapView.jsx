@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'
+import Loading from '../../components/Loading';
 
 export default function MapView() {
 
@@ -26,7 +27,7 @@ export default function MapView() {
     
     return (
         <div>
-        {isLoading && <div>LOADING...</div>}
+        {isLoading && <Loading />}
         {map && <div>
             <h3>{map.displayName}</h3>
             <img src={map.listViewIcon} alt={map.displayName} />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import Loading from '../../components/Loading';
 
 export default function MapsView() {
 
@@ -24,7 +25,7 @@ export default function MapsView() {
     
     return (
         <div>
-        {isLoading && <div>LOADING...</div>}
+        {isLoading && <Loading />}
         {maps && maps.map(elem => {
             return (
                 <div key={elem.uuid}>

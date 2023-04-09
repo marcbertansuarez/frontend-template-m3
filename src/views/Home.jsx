@@ -14,6 +14,7 @@ import { MdOutlineAddCircleOutline } from 'react-icons/md';
 import { ImEyePlus } from 'react-icons/im';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { GrEdit } from 'react-icons/gr';
+import Loading from '../components/Loading';
 
 export default function Home() {
 
@@ -84,7 +85,7 @@ export default function Home() {
   return (
     <div>
       <h1 className='lineup-h1'>Home</h1>
-      {isLoading && <div>LOADING...</div>}
+      {isLoading && <Loading />}
       <div>
       <form className="form-search" onSubmit={handleSubmitSearch}>
         <div className='form-search-input'>
