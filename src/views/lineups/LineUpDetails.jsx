@@ -108,21 +108,23 @@ const handleSaveReview = async (reviewId, content) => {
           <LineUpCard key={lineup._id} lineup={lineup} handleDeleteLineup={handleDeleteLineup} handleLikes={handleLikes}/>
         </div>
       )}
-      {user && <div>
-        <form onSubmit={handleReviewSubmit}>
-          <label>Add a new review for this lineup</label>
-          <input type="text" name="content" value={newReview.content} onChange={handleNewReview}/>
-          <button type="submit">New review</button>
-        </form>
-      </div>}
-      <div>
-      {reviews.length === 0 && <div>No reviews for this post yet</div>}
+      <div className="review">
+      <div className="reviews">
+      {reviews.length === 0 && lineup && <div>No reviews for this post yet</div>}
         {reviews &&
           reviews.map((review) => {
             return (
               <ReviewCard key={review._id} review={review} handleDeleteReview={handleDeleteReview} handleSaveReview={handleSaveReview}/>
             );
           })}
+          </div>
+          {user && lineup &&
+        <form className="new-review" onSubmit={handleReviewSubmit}>
+          <label>Add a new review</label>
+          <input type="text" name="content" value={newReview.content} onChange={handleNewReview}/>
+          <button type="submit">New review</button>
+        </form>
+      }
       </div>
     </div>
   );

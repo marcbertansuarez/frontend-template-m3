@@ -12,14 +12,14 @@ import getMapImage from '../utils/getMapImage';
 export default function LineUpCard({lineup, handleDeleteLineup, handleLikes}) {
     const { user } = useContext(AuthContext)
     return (
-        <div>
+        <div className='lineup-card-details'>
           <h1>{lineup.title}</h1>
-          <div>
-          <img style={{width: "40px"}} src={getAgentImage(lineup.agent)} alt={lineup.agent} />
+          <div className='lineup-agent'>
+          <img src={getAgentImage(lineup.agent)} alt={lineup.agent} />
           <h4>{lineup.agent}</h4>
           </div>
-          <div>
-            <img style={{width: "250px"}} src={getMapImage(lineup.map)} alt={lineup.map} />
+          <div className='lineup-map'>
+            <img src={getMapImage(lineup.map)} alt={lineup.map} />
             <h4>{lineup.map}</h4>
             </div>
           <iframe
@@ -27,14 +27,19 @@ export default function LineUpCard({lineup, handleDeleteLineup, handleLikes}) {
               lineup.video
             )}`}
           ></iframe>
-          <form onClick={() => handleLikes(lineup._id)}>{lineup.isLiked ? <AiFillHeart size={20} color="red" /> : <AiOutlineHeart size={20}/>}</form>
-            <p>Likes: {lineup.numberOfLikes}</p>
+          <div className='lineup-info-details'>
           {lineup.author && (
-            <Link to={user ? `/profile/${lineup.author._id}` : '/login' }>
-              {lineup.author.username}
+            <Link className='lineup-user' to={user ? `/profile/${lineup.author._id}` : '/login' }>
+            <img src={lineup.author.image} alt={lineup.author.username} />
+              <p>{lineup.author.username}</p>
             </Link>
           )}
-          {user && user._id === lineup.author._id && <div>
+          <div className='lineup-like-1'>
+          <form onClick={() => handleLikes(lineup._id)}>{lineup.isLiked ? <AiFillHeart size={20} color="red" /> : <AiOutlineHeart size={20}/>}</form>
+            <p>{lineup.numberOfLikes}</p>
+            </div>
+          </div>
+          {user && user._id === lineup.author._id && <div className='lineup-user-actions'>
           <button onClick={() => handleDeleteLineup(lineup._id)}>Delete</button>
           <Link to={`/lineup/${lineup._id}/edit`}>Edit</Link>
           </div>}

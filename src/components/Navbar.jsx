@@ -1,19 +1,19 @@
 import React, { useContext, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import logo from '../images/logo.png';
+import logook from '../images/logo ok.png';
 import { MdClose } from 'react-icons/md';
 import { FiMenu } from 'react-icons/fi';
 
 
 export default function Navbar() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext); 
+  const { isLoggedIn, logOutUser } = useContext(AuthContext); 
   const navigate = useNavigate();
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   return (
     <div className="general-nav">
-      <img style={{width: "60px"}} src={logo} alt="ValoVision" />
+      <img style={{width: "60px"}} src={logook} alt="ValoVision" />
       <div className="navbar">
       <button className="toggle" onClick={() => setNavbarOpen((prev) => !prev)}>
           {navbarOpen ? (
@@ -41,7 +41,6 @@ export default function Navbar() {
           setNavbarOpen(false)}}>Log out</button></li>}
         <li><button onClick={() => navigate(-1)}>Go back</button></li>
       </ul>
-      {user && <p>Hello {user.username}</p> }
       </div>
     </div>
   )
