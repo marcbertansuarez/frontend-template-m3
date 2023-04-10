@@ -332,3 +332,50 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* New Lineup */
+.new-lineup {
+  margin-top: 80px;
+}
+
+.new-lineup h2 {
+  padding-top: 20px;
+  margin-left: 20px;
+}
+
+.new-lineup form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(170, 162, 162, 0.7);
+  width: 90vw;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.new-lineup form label {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid white;
+  width: 40vw;
+  color: white;
+}
+
+.new-lineup form input {
+  padding: 5px;
+}
+
+.new-lineup button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 80px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgba(178, 8, 51, 0.8);
+}
+
+button {
+  font-family: 'Noto Sans JP', sans-serif;;
+}

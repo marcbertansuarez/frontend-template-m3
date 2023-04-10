@@ -41,7 +41,7 @@ export default function NewLineUp() {
 
 
     return (
-        <div>
+        <div className='new-lineup'>
             <h2>Create new LineUp</h2>
             <form onSubmit={handleSubmit}>
                 <label>Title</label>
@@ -66,7 +66,7 @@ export default function NewLineUp() {
                 <input type="text" name="description" value={newLineup.description} onChange={handleChange}/>
                 <label>Video url</label>
                 <input type="text" name="video" value={newLineup.video} onChange={handleChange}/>
-                <button type="submit">Create lineup</button>
+                <button type="submit">Create</button>
             </form>
         </div>
     )
