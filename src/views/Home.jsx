@@ -84,7 +84,7 @@ export default function Home() {
     
   return (
     <div>
-      <h1 className='lineup-h1'>Home</h1>
+      <h1 className='lineup-h1'>Find Lineups</h1>
       {isLoading && <Loading />}
       <div>
       <form className="form-search" onSubmit={handleSubmitSearch}>
@@ -131,7 +131,7 @@ export default function Home() {
         )
       })}
       </div>
-      {user && <Link to={'/lineup/create'}><MdOutlineAddCircleOutline /></Link>}
+      {user && <Link className='create-lineup' to={'/lineup/create'}><MdOutlineAddCircleOutline size={50} color='white' /></Link>}
     </div>
   )
 }

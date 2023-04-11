@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import profileService from '../../services/profileService';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../components/Loading';
 export default function ProfileEdit() {
     
 
@@ -61,11 +62,10 @@ export default function ProfileEdit() {
     }
 
     return (
-        <>
-        {isLoading && <div>LOADING...</div>}
-        <div>
+        <div className='form-edit'>
+        {isLoading && <Loading />}
             <h2>Editing {profile.username}</h2>
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
+            <form className='form-edit-form' onSubmit={handleSubmit} encType="multipart/form-data">
                 <label>Update username</label>
                 <input type="text" name="username" value={profile.username} onChange={handleChange}/>
                 <label>Update image</label>
@@ -73,6 +73,5 @@ export default function ProfileEdit() {
                 <button type="submit">Edit profile</button>
             </form>
         </div>
-        </>
     )
 }

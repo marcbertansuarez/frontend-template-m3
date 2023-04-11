@@ -10,6 +10,9 @@ import { AiFillHeart } from 'react-icons/ai';
 import { AiOutlineHeart } from 'react-icons/ai';
 import getAgentImage from '../../utils/getAgentImage';
 import getMapImage from '../../utils/getMapImage';
+import { ImEyePlus } from 'react-icons/im';
+import Loading from '../../components/Loading';
+import { MdOutlineAddCircleOutline } from 'react-icons/md';
 
 export default function ProfileUser() {
 
@@ -52,37 +55,49 @@ export default function ProfileUser() {
 
     
   return (
-    <div>
-      {isLoading && <div>LOADING...</div>}
-      {profile && <div>
-        <h3>{profile.username}</h3>
-        <img style={{width: "20px"}} src={profile.image} alt={profile.username} />
-      </div>}
-      <div>
-      {lineups && !isLoading && lineups.map(elem => {
-        return (
-          <div key={elem._id}>
-            <h1>{elem.title}</h1>
-            <div>
-                <img style={{width: "40px"}} src={getAgentImage(elem.agent)} alt={elem.agent} />
-                <h4>{elem.agent}</h4>
-            </div>
-            <div>
-            <img style={{width: "250px"}} src={getMapImage(elem.map)} alt={elem.map} />
-            <h4>{elem.map}</h4>
-            </div>
-            <iframe src={`https://www.youtube.com/embed/${getYouTubeVideoId(
-                    elem.video
-                  )}`}></iframe>
-            
-            <form onClick={() => handleLikes(elem._id)}>{elem.isLiked ? <AiFillHeart size={20} color="red" /> : <AiOutlineHeart size={20}/>}</form>
-            <p>Likes: {elem.numberOfLikes}</p> 
-            <Link to={`/lineup/${elem._id}`}>See more</Link>
-          </div>
-        )
-      })}
+    <div className='profile-user'>
+    {isLoading && <Loading />}
+    {profile && <div className='user'>
+    <div className='user-1'>
+    <img src={profile.image} alt={profile.username} />
+      <Link className='user-name-link' to="/profile"><h3>{profile.username}</h3></Link>
       </div>
-      {user && <Link to={'/lineup/create'}>Create new Line Up</Link>}
+    </div>}
+    <div>
+    {lineups.length === 0 && <div>No lineup's liked</div>}
+    {lineups && !isLoading && lineups.map(elem => {
+      return (
+        <div className='lineup-card' key={elem._id}>
+          <h1>{elem.title}</h1>
+          <div className='lineup-agent'>
+          <img src={getAgentImage(elem.agent)} alt={elem.agent} />
+          <h4>{elem.agent}</h4>
+          </div>
+          <div className='lineup-map'>
+          <img src={getMapImage(elem.map)} alt={elem.map} />
+          <h4>{elem.map}</h4>
+          </div>
+          <iframe src={`https://www.youtube.com/embed/${getYouTubeVideoId(
+                  elem.video
+                )}`}></iframe>
+                <div className='lineup-info'>
+          <Link className='lineup-user' to={`/profile/${elem.author._id}`}>
+          <img src={elem.author.image} alt={elem.author.username} />
+          <p>{elem.author.username}</p>
+          </Link>
+          <div className='lineup-like'>
+          <div className='lineup-like-1'>
+          <form onClick={() => handleLikes(elem._id)}>{elem.isLiked ? <AiFillHeart size={20} color="red" /> : <AiOutlineHeart size={20}/>}</form>
+          <p>{elem.numberOfLikes}</p> 
+          </div>
+          <Link to={`/lineup/${elem._id}`}><ImEyePlus color='white'/></Link>
+          </div>
+          </div>
+        </div>
+      )
+    })}
     </div>
+    {user && <Link className='create-lineup' to={'/lineup/create'}><MdOutlineAddCircleOutline size={50} color='white' /></Link>}
+  </div>
   )
 }

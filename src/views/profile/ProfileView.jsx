@@ -15,6 +15,7 @@ import Loading from '../../components/Loading';
 import { ImEyePlus } from 'react-icons/im';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { GrEdit } from 'react-icons/gr';
+import { MdOutlineAddCircleOutline } from 'react-icons/md';
 
 export default function ProfileView() {
 
@@ -115,7 +116,7 @@ export default function ProfileView() {
         )
       })}
       </div>
-      {user && <Link to={'/lineup/create'}>Create new Line Up</Link>}
+      {user && <Link className='create-lineup' to={'/lineup/create'}><MdOutlineAddCircleOutline size={50} color='white' /></Link>}
     </div>
   )
 }

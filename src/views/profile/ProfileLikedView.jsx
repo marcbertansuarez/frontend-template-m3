@@ -15,6 +15,7 @@ import Loading from '../../components/Loading';
 import { GrEdit } from 'react-icons/gr';
 import { ImEyePlus } from 'react-icons/im';
 import { RiDeleteBin5Line } from 'react-icons/ri';
+import { MdOutlineAddCircleOutline } from 'react-icons/md';
 
 export default function ProfileLikedView() {
 
@@ -30,7 +31,6 @@ export default function ProfileLikedView() {
       const response = await profileService.getProfileLiked();
       setProfile(response.user)
       setLineups(response.likedLineUps)
-      console.log(response.likedLineUps)
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -70,7 +70,7 @@ export default function ProfileLikedView() {
       {profile && <div className='user'>
       <div className='user-1'>
       <img src={profile.image} alt={profile.username} />
-        <h3>{profile.username}</h3>
+        <Link className='user-name-link' to="/profile"><h3>{profile.username}</h3></Link>
         </div>
         <div className='user-2'>
       <Link className='user-2-1' to="/profile/edit"><GrEdit /> Profile</Link>
@@ -117,7 +117,7 @@ export default function ProfileLikedView() {
         )
       })}
       </div>
-      {user && <Link to={'/lineup/create'}>Create new Line Up</Link>}
+      {user && <Link className='create-lineup' to={'/lineup/create'}><MdOutlineAddCircleOutline size={50} color='white' /></Link>}
     </div>
   )
 }
