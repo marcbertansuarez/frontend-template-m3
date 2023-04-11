@@ -19,6 +19,10 @@ getLineUps() {
     return this.api.get('/').then(({ data }) => data).catch(err => console.error(err));
 }
 
+getLineUpsNoUser() {
+  return this.api.get('/lineup').then(({ data }) => data).catch(err => console.error(err));
+}
+
 getLineUp(id) {
     return this.api.get(`/${id}`).then(({ data }) => data).catch(err => console.error(err));
 }

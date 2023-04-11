@@ -2,7 +2,6 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React, {useState, useEffect, useContext} from 'react';
 import lineupService from '../services/lineupService';
-import likeService from '../services/likeService';
 import { Link, useNavigate } from 'react-router-dom';
 import getYouTubeVideoId from '../utils/getYoutubeVideoId';
 import { AuthContext } from '../context/AuthContext';
@@ -12,11 +11,9 @@ import getAgentImage from '../utils/getAgentImage';
 import getMapImage from '../utils/getMapImage';
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
 import { ImEyePlus } from 'react-icons/im';
-import { RiDeleteBin5Line } from 'react-icons/ri';
-import { GrEdit } from 'react-icons/gr';
 import Loading from '../components/Loading';
 
-export default function LineUpsLogIn() {
+export default function LineUpsViewNoUser() {
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -27,7 +24,7 @@ export default function LineUpsLogIn() {
   
   const getLineups = async () => {
     try {
-      const response = await lineupService.getLineUps();
+      const response = await lineupService.getLineUpsNoUser();
       setLineups(response)
       setIsLoading(false);
     } catch (error) {
@@ -38,27 +35,6 @@ export default function LineUpsLogIn() {
     useEffect(() => {
       getLineups()
     }, []) 
-
-    const handleLikes = async (lineupId) => {
-      if (!user) {
-        navigate('/login');
-      }
-      try {
-        await likeService.createLike(lineupId);
-        getLineups();
-      } catch (error) {
-        console.log(error)
-      }
-    };
-
-    const handleDelete = async (lineupId) => {
-      try {
-        await lineupService.deleteLineUp(lineupId);
-        setLineups(lineups.filter(lineup => lineup._id !== lineupId));
-      } catch (error) {
-        console.log(error)
-      }
-    };
 
     const handleChange = (e) => {
       setSearch(e.target.value);
@@ -116,22 +92,19 @@ export default function LineUpsLogIn() {
             </Link>
             <div className='lineup-like'>
             <div className='lineup-like-1'>
-            <form onClick={() => handleLikes(elem._id)}>{elem.isLiked ? <AiFillHeart size={20} color="red" /> : <AiOutlineHeart size={20}/>}</form>
+            <form onClick={() => navigate("/login")}>{elem.isLiked ? <AiFillHeart size={20} color="red" /> : <AiOutlineHeart size={20}/>}</form>
             <p>{elem.numberOfLikes}</p> 
             </div>
-            <Link to={`/lineup/${elem._id}`}><ImEyePlus size={20} color='white'/></Link>
+            <Link to="/login"><ImEyePlus size={20} color='white'/></Link>
             </div>
             </div>
-            {user && user._id === elem.author._id && (
-              <div className='lineup-user-actions'>
-              <Link to={`/lineup/${elem._id}/edit`}><GrEdit /></Link>
-              <button onClick={() => handleDelete(elem._id)}><RiDeleteBin5Line /></button>
-              </div>)}
           </div>
         )
       })}
       </div>
-      {user && <div className='create'> <Link className='create-lineup' to={'/lineup/create'}><MdOutlineAddCircleOutline size={50} color='white' /></Link> </div>}
+      <div className='create'>
+      <Link className='create-lineup' to={'/login'}><MdOutlineAddCircleOutline size={50} color='white' /></Link> 
+      </div>
     </div>
   )
 }

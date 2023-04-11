@@ -10,7 +10,7 @@ export default function Home() {
         {user ? <h1>Hello {user.username}</h1> : <h1>Welcome to ValoVision</h1>}
         
         <div className='home-links'>
-            <Link to="/lineup">Discover LineUps</Link>
+            <Link to={user ? "/lineup" : "/lineups"}>Discover LineUps</Link>
             <Link to="/tracker">Track players</Link>
             <Link to="/agents">Discover Agents</Link>
             <Link to="/maps">Discover Maps</Link>

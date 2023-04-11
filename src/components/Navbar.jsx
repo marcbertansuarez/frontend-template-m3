@@ -7,7 +7,7 @@ import { FiMenu } from 'react-icons/fi';
 
 
 export default function Navbar() {
-  const { isLoggedIn, logOutUser } = useContext(AuthContext); 
+  const { isLoggedIn, logOutUser, user } = useContext(AuthContext); 
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   return (
@@ -30,7 +30,7 @@ export default function Navbar() {
       <li><NavLink to="/" onClick={() => setNavbarOpen(false)}>Home</NavLink></li>
         {!isLoggedIn && <li><NavLink to="/signup" onClick={() => setNavbarOpen(false)}>Sign up</NavLink></li>}
         {!isLoggedIn && <li><NavLink to="/login" onClick={() => setNavbarOpen(false)}>Login</NavLink></li>}
-        <li><NavLink to="/lineup" onClick={() => setNavbarOpen(false)}>LineUps</NavLink></li>
+        <li><NavLink to={user ? "/lineup" : "/lineups"} onClick={() => setNavbarOpen(false)}>LineUps</NavLink></li>
         <li><NavLink to="/tracker" onClick={() => setNavbarOpen(false)}>Tracker Player</NavLink></li>
         <li><NavLink to="/agents" onClick={() => setNavbarOpen(false)}>Valorant Agents</NavLink></li>
         <li><NavLink to="/maps" onClick={() => setNavbarOpen(false)}>Valorant Maps</NavLink></li>

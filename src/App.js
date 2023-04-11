@@ -22,6 +22,7 @@ import AgentView from './views/agents/AgentView';
 import MapsView from './views/maps/MapsView';
 import MapView from './views/maps/MapView';
 import LineUpsLogIn from './views/LineUpsLogIn';
+import LineUpsViewNoUser from './views/LineUpsViewNoUser';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/lineup" element={<LineUpsLogIn />} />
+        <Route path="/lineups" element={<LineUpsViewNoUser />} />
         <Route path="/lineup/:lineupId" element={<LineUpDetails />} />
         <Route path="/lineup/:lineupId/edit" element={<LineUpEdit />} />
         <Route path="/lineup/create" element={<NewLineUp />} />

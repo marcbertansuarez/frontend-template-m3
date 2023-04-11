@@ -8,6 +8,9 @@ import { AiFillHeart } from 'react-icons/ai';
 import { AiOutlineHeart } from 'react-icons/ai';
 import getAgentImage from '../utils/getAgentImage';
 import getMapImage from '../utils/getMapImage';
+import { RiDeleteBin5Line } from 'react-icons/ri';
+import { GrEdit } from 'react-icons/gr';
+import { MdOutlineAddCircleOutline } from 'react-icons/md';
 
 export default function LineUpCard({lineup, handleDeleteLineup, handleLikes}) {
     const { user } = useContext(AuthContext)
@@ -39,10 +42,12 @@ export default function LineUpCard({lineup, handleDeleteLineup, handleLikes}) {
             <p>{lineup.numberOfLikes}</p>
             </div>
           </div>
-          {user && user._id === lineup.author._id && <div className='lineup-user-actions'>
-          <button onClick={() => handleDeleteLineup(lineup._id)}>Delete</button>
-          <Link to={`/lineup/${lineup._id}/edit`}>Edit</Link>
-          </div>}
+          {user && user._id === lineup.author._id && (
+              <div className='lineup-user-actions'>
+              <Link to={`/lineup/${lineup._id}/edit`}><GrEdit /></Link>
+              <button onClick={() => handleDeleteLineup(lineup._id)}><RiDeleteBin5Line /></button>
+              </div>)}
+              {user && <div className='create'> <Link className='create-lineup' to={'/lineup/create'}><MdOutlineAddCircleOutline size={50} color='white' /></Link> </div>}
         </div>
     )
 }
