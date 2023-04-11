@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import authService from '../../services/authService';
 
 export default function Login() {
@@ -29,7 +29,7 @@ export default function Login() {
       if (response.authToken) {
         storeToken(response.authToken);
         authenticateUser();
-        navigate('/lineup');
+        navigate('/');
         toast.success('Welcome back!')
       } else {
         setErrorMessage('Unable to authenticate user')
@@ -57,6 +57,7 @@ export default function Login() {
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         <button type="submit">Log in </button>
       </form>
+      <Link to="/signup">Don't have an account?</Link>
     </div>
   )
 }

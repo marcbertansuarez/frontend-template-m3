@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import authService from '../../services/authService';
 
 export default function Signup() {
@@ -70,6 +70,7 @@ export default function Signup() {
         <input type="file" name="image" onChange={handleImage} accept="image/*" />
         <button type="submit">Register</button>
       </form>
+      <Link to="/login">Already have an account?</Link>
     </div>
   )
 }

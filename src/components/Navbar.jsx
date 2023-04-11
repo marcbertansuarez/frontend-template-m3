@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import logook from '../images/logo ok.png';
 import { MdClose } from 'react-icons/md';
@@ -8,7 +8,6 @@ import { FiMenu } from 'react-icons/fi';
 
 export default function Navbar() {
   const { isLoggedIn, logOutUser } = useContext(AuthContext); 
-  const navigate = useNavigate();
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   return (
@@ -29,9 +28,9 @@ export default function Navbar() {
       </button>
       <ul className={`menu-nav${navbarOpen ? ' show-menu' : ''}`}>
       <li><NavLink to="/" onClick={() => setNavbarOpen(false)}>Home</NavLink></li>
-        <li><NavLink to="/lineup" onClick={() => setNavbarOpen(false)}>LineUps</NavLink></li>
         {!isLoggedIn && <li><NavLink to="/signup" onClick={() => setNavbarOpen(false)}>Sign up</NavLink></li>}
         {!isLoggedIn && <li><NavLink to="/login" onClick={() => setNavbarOpen(false)}>Login</NavLink></li>}
+        <li><NavLink to="/lineup" onClick={() => setNavbarOpen(false)}>LineUps</NavLink></li>
         <li><NavLink to="/tracker" onClick={() => setNavbarOpen(false)}>Tracker Player</NavLink></li>
         <li><NavLink to="/agents" onClick={() => setNavbarOpen(false)}>Valorant Agents</NavLink></li>
         <li><NavLink to="/maps" onClick={() => setNavbarOpen(false)}>Valorant Maps</NavLink></li>
@@ -40,7 +39,7 @@ export default function Navbar() {
         {isLoggedIn && <li><button onClick={() => {
           logOutUser() 
           setNavbarOpen(false)}}>Log out</button></li>}
-        <li><button onClick={() => navigate(-1)}>Go back</button></li>
+        {/* <li><button onClick={() => navigate(-1)}>Go back</button></li> */}
       </ul>
       </div>
     </div>
