@@ -21,6 +21,7 @@ import AgentsView from './views/agents/AgentsView';
 import AgentView from './views/agents/AgentView';
 import MapsView from './views/maps/MapsView';
 import MapView from './views/maps/MapView';
+import LineUpsLogIn from './views/LineUpsLogIn';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/lineup" element={<LineUpsLogIn />} />
         <Route path="/lineup/:lineupId" element={<LineUpDetails />} />
         <Route path="/lineup/:lineupId/edit" element={<LineUpEdit />} />
         <Route path="/lineup/create" element={<NewLineUp />} />

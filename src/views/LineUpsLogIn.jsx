@@ -1,45 +1,42 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React, {useState, useEffect, useContext} from 'react';
-import profileService from '../../services/profileService';
-import lineupService from '../../services/lineupService';
-import likeService from '../../services/likeService';
+import lineupService from '../services/lineupService';
+import likeService from '../services/likeService';
 import { Link, useNavigate } from 'react-router-dom';
-import getYouTubeVideoId from '../../utils/getYoutubeVideoId';
-import { AuthContext } from '../../context/AuthContext';
+import getYouTubeVideoId from '../utils/getYoutubeVideoId';
+import { AuthContext } from '../context/AuthContext';
 import { AiFillHeart } from 'react-icons/ai';
 import { AiOutlineHeart } from 'react-icons/ai';
-import getAgentImage from '../../utils/getAgentImage';
-import getMapImage from '../../utils/getMapImage';
-import Loading from '../../components/Loading';
+import getAgentImage from '../utils/getAgentImage';
+import getMapImage from '../utils/getMapImage';
+import { MdOutlineAddCircleOutline } from 'react-icons/md';
 import { ImEyePlus } from 'react-icons/im';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { GrEdit } from 'react-icons/gr';
-import { MdOutlineAddCircleOutline } from 'react-icons/md';
+import Loading from '../components/Loading';
 
-export default function ProfileView() {
+export default function LineUpsLogIn() {
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [profile, setProfile] = useState({});
   const [lineups, setLineups] = useState([]);
+  const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   
-  const getProfile = async () => {
+  const getLineups = async () => {
     try {
-      const response = await profileService.getProfile();
-      setProfile(response.user)
-      setLineups(response.lineupLikes)
+      const response = await lineupService.getLineUps();
+      setLineups(response)
       setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   }
-  
 
     useEffect(() => {
-      getProfile()
+      getLineups()
     }, []) 
 
     const handleLikes = async (lineupId) => {
@@ -48,7 +45,7 @@ export default function ProfileView() {
       }
       try {
         await likeService.createLike(lineupId);
-        getProfile();
+        getLineups();
       } catch (error) {
         console.log(error)
       }
@@ -61,27 +58,45 @@ export default function ProfileView() {
       } catch (error) {
         console.log(error)
       }
+    };
+
+    const handleChange = (e) => {
+      setSearch(e.target.value);
+    }
+
+    const handleSubmitSearch = async (e) => {
+      setIsLoading(true);
+      e.preventDefault();
+      try {
+        const response = await lineupService.searchLineUp(search);
+        setLineups(response);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error)
+      }
+    };
+
+    const handleClearSearch = async () => {
+      setSearch('')
+      getLineups();
     }
 
     
   return (
-    <div className='profile-user'>
+    <div>
+      <h1 className='lineup-h1'>Find Lineups</h1>
       {isLoading && <Loading />}
-      {profile && <div className='user'>
-      <div className='user-1'>
-      <img src={profile.image} alt={profile.username} />
-        <h3>{profile.username}</h3>
-        </div>
-        <div className='user-2'>
-      <Link className='user-2-1' to="/profile/edit"><GrEdit /> Profile</Link>
-      <Link className='user-2-1' to="/profile/liked"><AiFillHeart size={20} color="red" />LineUps</Link>
-      </div>
-      </div>}
-      
       <div>
+      <form className="form-search" onSubmit={handleSubmitSearch}>
+        <div className='form-search-input'>
+        <input type="text" name="agent" onChange={handleChange} placeholder='Search for agent...'/>
+        <button className="form-search-btn1" type="submit">Search</button>
+        <button className='form-search-btn2' type="button" onClick={handleClearSearch}>Clear</button>
+        </div>
+      </form>
       {lineups && !isLoading && lineups.map(elem => {
         return (
-          <div className='lineup-card' key={elem._id}>
+          <div className="lineup-card" key={elem._id}>
             <h1>{elem.title}</h1>
             <div className='lineup-agent'>
             <img src={getAgentImage(elem.agent)} alt={elem.agent} />
@@ -94,8 +109,8 @@ export default function ProfileView() {
             <iframe src={`https://www.youtube.com/embed/${getYouTubeVideoId(
                     elem.video
                   )}`}></iframe>
-                  <div className='lineup-info'>
-            <Link className='lineup-user' to={`/profile/${elem.author._id}`}>
+            <div className='lineup-info'>
+            <Link className='lineup-user' to={user ? `/profile/${elem.author._id}` : '/login' }>
             <img src={elem.author.image} alt={elem.author.username} />
             <p>{elem.author.username}</p>
             </Link>
@@ -104,12 +119,12 @@ export default function ProfileView() {
             <form onClick={() => handleLikes(elem._id)}>{elem.isLiked ? <AiFillHeart size={20} color="red" /> : <AiOutlineHeart size={20}/>}</form>
             <p>{elem.numberOfLikes}</p> 
             </div>
-            <Link to={`/lineup/${elem._id}`}><ImEyePlus color='white'/></Link>
+            <Link to={`/lineup/${elem._id}`}><ImEyePlus size={20} color='white'/></Link>
             </div>
             </div>
             {user && user._id === elem.author._id && (
               <div className='lineup-user-actions'>
-              <Link to={`/lineup/${elem._id}/edit`}><GrEdit/></Link>
+              <Link to={`/lineup/${elem._id}/edit`}><GrEdit /></Link>
               <button onClick={() => handleDelete(elem._id)}><RiDeleteBin5Line /></button>
               </div>)}
           </div>

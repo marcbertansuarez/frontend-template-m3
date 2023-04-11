@@ -28,7 +28,8 @@ export default function Navbar() {
       )}
       </button>
       <ul className={`menu-nav${navbarOpen ? ' show-menu' : ''}`}>
-        <li><NavLink to="/" onClick={() => setNavbarOpen(false)}>Home</NavLink></li>
+      <li><NavLink to="/" onClick={() => setNavbarOpen(false)}>Home</NavLink></li>
+        <li><NavLink to="/lineup" onClick={() => setNavbarOpen(false)}>LineUps</NavLink></li>
         {!isLoggedIn && <li><NavLink to="/signup" onClick={() => setNavbarOpen(false)}>Sign up</NavLink></li>}
         {!isLoggedIn && <li><NavLink to="/login" onClick={() => setNavbarOpen(false)}>Login</NavLink></li>}
         <li><NavLink to="/tracker" onClick={() => setNavbarOpen(false)}>Tracker Player</NavLink></li>
