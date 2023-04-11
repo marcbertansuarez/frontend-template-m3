@@ -26,12 +26,12 @@ export default function MapView() {
 
     
     return (
-        <div>
+        <div className='map-details'>
         {isLoading && <Loading />}
-        {map && <div>
-            <h3>{map.displayName}</h3>
-            <img src={map.listViewIcon} alt={map.displayName} />
-            <img src={map.displayIcon} alt={map.displayName} />  
+        {map && <div className='map-details-info'>
+            <h2>{map.displayName}</h2>
+            <img className='map-details-picture' src={map.listViewIcon} alt={map.displayName} />
+            <img className='map-details-map' src={map.displayIcon} alt={map.displayName} />  
         </div>}
         </div>
     )

@@ -24,18 +24,21 @@ export default function MapsView() {
 
     
     return (
-        <div>
+        <div className='maps-view'>
         {isLoading && <Loading />}
+        <h1>Maps</h1>
+        <div className='maps'>
         {maps && maps.map(elem => {
             return (
-                <div key={elem.uuid}>
+                <div className='map' key={elem.uuid}>
                 <Link to={`/maps/${elem.uuid}`}>
                     <h4>{elem.displayName}</h4>
-                    <img style={{width: "200px"}} src={elem.splash} alt={elem.displayName} />
+                    <img src={elem.splash} alt={elem.displayName} />
                     </Link>
                 </div>
             )
         })}
+        </div>
         </div>
     )
 }

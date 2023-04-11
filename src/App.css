@@ -627,3 +627,68 @@ button {
   border-radius: 10px;
   margin-top: 25px;
 }
+
+.maps-view {
+  margin-top: 80px;
+}
+
+.maps-view h1 {
+  margin-left: 20px;
+}
+
+.maps {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.map {
+  background-color: rgba(170, 162, 162, 0.7);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.map a {
+  text-decoration: none;
+  color: white;
+}
+
+.map h4 {
+  text-shadow: 1px 0px 3px rgb(18, 34, 52);
+}
+
+.map img {
+  width: 150px;
+}
+
+.map-details {
+  margin-top: 80px;
+  
+}
+
+.map-details-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background-color: rgba(170, 162, 162, 0.7);
+  width: 90vw;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.map-details-info h2 {
+  margin-top: 10px;
+}
+
+.map-details-picture {
+  width: 300px;
+}
+
+.map-details-map {
+  width: 350px;
+}
