@@ -131,7 +131,7 @@ export default function Home() {
         )
       })}
       </div>
-      {user && <Link className='create-lineup' to={'/lineup/create'}><MdOutlineAddCircleOutline size={50} color='white' /></Link>}
+      {user && <div className='create'> <Link className='create-lineup' to={'/lineup/create'}><MdOutlineAddCircleOutline size={50} color='white' /></Link> </div>}
     </div>
   )
 }

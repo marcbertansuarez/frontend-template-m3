@@ -22,12 +22,11 @@ export default function LineUpEdit() {
     const getLineup = async () => {
         try {
             const response = await lineupService.getLineUp(lineupId);
-            setLineup(response.lineup);
+            setLineup(response.lineupLike);
         } catch (error) {
             console.log(error);
         }
     } 
-    console.log(lineup)
 
     useEffect(() => {
         getLineup()
@@ -55,7 +54,8 @@ export default function LineUpEdit() {
 
 
     return (
-        <div>
+        <div className='new-lineup'>
+        {lineup && <div> 
             <h2>Editing {lineup.title}</h2>
             <form onSubmit={handleSubmit}>
                 <label>Title</label>
@@ -82,6 +82,8 @@ export default function LineUpEdit() {
                 <input type="text" name="video" value={lineup.video} onChange={handleChange}/>
                 <button type="submit">Submit changes</button>
             </form>
+            </div>}
+            
         </div>
     )
 };

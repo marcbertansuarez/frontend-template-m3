@@ -62,6 +62,7 @@ export default function ProfileEdit() {
     }
 
     return (
+        <div className='general-form-edit'>
         <div className='form-edit'>
         {isLoading && <Loading />}
             <h2>Editing {profile.username}</h2>
@@ -72,6 +73,7 @@ export default function ProfileEdit() {
                 <input type="file" name="image" onChange={handleImage} accept="image/*"/>
                 <button type="submit">Edit profile</button>
             </form>
+        </div>
         </div>
     )
 }

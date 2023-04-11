@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Loading from '../components/Loading';
 
 export default function TrackerView() {
 
@@ -33,17 +34,22 @@ export default function TrackerView() {
 
     
     return (
-        <>
-        <div>
+        <div className='general-form-edit'>
+        <h1>Tracker Players</h1>
+        <div className='form-tracker'>
             <form onSubmit={handleSubmit}>
+            <div className='form-tracker-1'>
                 <label>Player name</label>
                 <input type="text" name="name" value={playerName} onChange={handleChangeName}/>
+                </div>
+                <div className='form-tracker-1'>
                 <label>Tag</label>
                 <input type="text" name="tag" value={tagPlayer} onChange={handleChangeTag}/>
+                </div>
                 <button type="submit">Find player</button>
             </form>
         </div>
-        {isLoading && <div>LOADING...</div>}
+        {isLoading && <Loading />}
         {player && playerInfo.data && <div>
             <h3>{player.data.name}{player.data.tag}</h3>
             <div>
@@ -53,6 +59,6 @@ export default function TrackerView() {
             </div>
             <img src={player.data.card.large} alt={player.data.name} />
         </div>}
-        </>
+        </div>
     )
 }
