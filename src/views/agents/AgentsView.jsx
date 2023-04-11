@@ -24,11 +24,14 @@ export default function AgentsView() {
 
     
     return (
-        <div>
+        <div className='agents-general'>
         {isLoading && <Loading />}
+        <h1>Agents</h1>
+        <div className='agents'>
+        
         {agents && agents.map(agent => {
             return (
-                <div key={agent.uuid}>
+                <div className='agent' key={agent.uuid}>
                     <Link to={`/agents/${agent.uuid}`}>
                     <img style={{width: "60px"}} src={agent.displayIconSmall} alt={agent.displayName} />
                     <h4>{agent.displayName}</h4>
@@ -36,6 +39,7 @@ export default function AgentsView() {
                 </div>
             )
         })}
+        </div>
         </div>
     
     )

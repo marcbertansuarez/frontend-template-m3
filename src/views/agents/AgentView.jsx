@@ -23,13 +23,13 @@ export default function AgentView() {
         getAgent()
         // eslint-disable-next-line
     }, [agentId]);
-    console.log(agent.uuid)
+    
     
     return (
-        <div>
+        <div className='agents-general'>
         {isLoading && <Loading />}
-        {agent && <div key={agent.uuid}>
-        <div>
+        {agent && <div className='agent-detail' key={agent.uuid}>
+        <div className='agent-info'>
             <h3>{agent.displayName}</h3>
             <p>{agent.role && agent.role.displayName}</p>
             <audio
@@ -41,21 +41,20 @@ export default function AgentView() {
                 Your browser does not support the
                 <code>audio</code> element.
             </audio>
-            <img style={{width: "250px"}} src={agent.bustPortrait} alt={agent.displayName} />
-            <p>{agent.description}</p>
-            <div>
+            <img src={agent.bustPortrait} alt={agent.displayName} />
+            <p className='agent-description'>{agent.description}</p>
+            </div>
+            <div className='agent-abilities'>
                 {agent.abilities && agent.abilities.map((abilitie) => {
                     return (
-                        <>
+                        <div className='abilitie'>
                             <h4>{abilitie.slot}</h4>
                             <h4>{abilitie.displayName}</h4>
-                            <p>{abilitie.description}</p>
                             <img src={abilitie.displayIcon} alt={abilitie.displayName} />
-                        </>
+                        </div>
                     )
                 })}
             </div>
-        </div>
         </div>}
         </div>
     

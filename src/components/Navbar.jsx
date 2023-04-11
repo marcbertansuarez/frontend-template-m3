@@ -17,14 +17,14 @@ export default function Navbar() {
       <div className="navbar">
       <button className="toggle" onClick={() => setNavbarOpen((prev) => !prev)}>
           {navbarOpen ? (
-        <MdClose style={{ width: '32px', height: '32px' }} />
+        <MdClose style={{ width: '32px', height: '32px' }} color='white' />
       ) : (
         <FiMenu
           style={{
             width: '32px',
             height: '32px',
           }}
-        />
+        color='white'/>
       )}
       </button>
       <ul className={`menu-nav${navbarOpen ? ' show-menu' : ''}`}>
