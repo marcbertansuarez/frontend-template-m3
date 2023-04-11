@@ -379,3 +379,66 @@ body {
 button {
   font-family: 'Noto Sans JP', sans-serif;;
 }
+
+.profile-user {
+  margin-top: 80px;
+}
+
+.user {
+  background-color: white;
+  width: 90vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.user-1 {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.user-1 img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: contain;
+  border: 1px solid black;
+}
+
+.user-1 h3 {
+  color: black;
+}
+
+.user-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-2 a {
+  text-decoration: none;
+  color: black;
+}
+
+.user-2-1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.liked-h1 {
+  color: white;
+  margin-left: 20px;
+  border-bottom: 2px solid white;
+  width: 20vw;
+  margin-top: -20px;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
