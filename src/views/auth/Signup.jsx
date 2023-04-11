@@ -55,16 +55,16 @@ export default function Signup() {
   }
 
   return (
-    <div>
+    <div className='new-lineup'>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>Username</label>
-        <input required type="text" name="username" value={user.username} onChange={handleChange} />
+        <input required type="text" name="username" value={user.username} onChange={handleChange} placeholder="username123"/>
         <label>Email</label>
-        <input required type="email" name="email" value={user.email} onChange={handleChange} />
+        <input required type="email" name="email" value={user.email} onChange={handleChange} placeholder="user@gmail.com"/>
         <label>Password</label>
-        <input required type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value) } />
-        <label>Repeat the password</label>
-        <input required type="password" name="passwordControl" value={passwordControl} onChange={(e) => setPasswordControl(e.target.value)} />
+        <input required type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********"/>
+        <label>Repeat password</label>
+        <input required type="password" name="passwordControl" value={passwordControl} onChange={(e) => setPasswordControl(e.target.value)} placeholder="********"/>
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         <label>Profile Picture</label>
         <input type="file" name="image" onChange={handleImage} accept="image/*" />

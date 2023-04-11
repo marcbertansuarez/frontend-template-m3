@@ -48,7 +48,7 @@ export default function Login() {
   }, [isLoggedIn])
 
   return (
-    <div>
+    <div className='new-lineup'>
       <form onSubmit={handleSubmit}>
         <label>Username or Email</label>
         <input required type="text" name="usernameOrEmail" value={user.usernameOrEmail} onChange={handleChange} />
