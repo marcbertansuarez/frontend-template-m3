@@ -42,7 +42,7 @@ export default function LineUpDetails() {
   const handleDeleteLineup = async (lineupId) => {
     try {
       await lineupService.deleteLineUp(lineupId);
-      navigate('/')
+      navigate(user ? '/lineup' : '/lineups')
     } catch (error) {
       console.log(error)
     }

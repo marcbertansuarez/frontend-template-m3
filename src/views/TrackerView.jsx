@@ -50,14 +50,14 @@ export default function TrackerView() {
             </form>
         </div>
         {isLoading && <Loading />}
-        {player && playerInfo.data && <div>
-            <h3>{player.data.name}{player.data.tag}</h3>
-            <div>
-                <p>Account level: {player.data.account_level}</p>
-                <p>Rank: {playerInfo.data.currenttierpatched}</p>
+        {player && playerInfo.data && <div className='tracker-info'>
+            <h3>{player.data.name} {player.data.tag}</h3>
+            <div className='tracker-info-1'>
+                <p>Account level: <b>{player.data.account_level}</b></p>
+                <p>Rank: <b>{playerInfo.data.currenttierpatched}</b></p>
                 <img src={playerInfo.data.images.small} alt={player.data.name} />
             </div>
-            <img src={player.data.card.large} alt={player.data.name} />
+            <img className='tracker-img' src={player.data.card.large} alt={player.data.name} />
         </div>}
         </div>
     )

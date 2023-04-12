@@ -11,7 +11,7 @@ export default function Home() {
         
         <div className='home-links'>
             <Link to={user ? "/lineup" : "/lineups"}>Discover LineUps</Link>
-            <Link to="/tracker">Track players</Link>
+            <Link to="/tracker">Track Players</Link>
             <Link to="/agents">Discover Agents</Link>
             <Link to="/maps">Discover Maps</Link>
             </div>

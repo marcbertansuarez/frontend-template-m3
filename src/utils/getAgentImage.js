@@ -32,7 +32,7 @@ const images = {
     'Harbor': harbor,
     'Jett': jett,
     'KAY/O': kayo,
-    'KillJoy': kj,
+    'Killjoy': kj,
     'Neon': neon,
     'Omen': omen,
     'Phoenix': phoenix,

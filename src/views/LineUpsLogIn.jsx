@@ -15,6 +15,7 @@ import { ImEyePlus } from 'react-icons/im';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { GrEdit } from 'react-icons/gr';
 import Loading from '../components/Loading';
+import { FaSearch } from 'react-icons/fa';
 
 export default function LineUpsLogIn() {
 
@@ -84,16 +85,22 @@ export default function LineUpsLogIn() {
     
   return (
     <div>
-    {isLoading && <Loading />}
-      <h1 className='lineup-h1'>Find Lineups</h1>
+     <div>
+     {!isLoading && <div>
+      <h1 className='lineup-h1'>Find LineUps</h1>
       <div>
       <form className="form-search" onSubmit={handleSubmitSearch}>
         <div className='form-search-input'>
+        <div className='form-search-1'>
         <input type="text" name="agent" onChange={handleChange} placeholder='Search for agent...'/>
-        <button className="form-search-btn1" type="submit">Search</button>
+        <button type="submit"><FaSearch /></button>
+        </div>
         <button className='form-search-btn2' type="button" onClick={handleClearSearch}>Clear</button>
         </div>
       </form>
+      </div>
+      </div>}
+      {isLoading && <Loading />}
       {lineups && !isLoading && lineups.map(elem => {
         return (
           <div className="lineup-card" key={elem._id}>
