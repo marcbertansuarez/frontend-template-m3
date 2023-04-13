@@ -31,7 +31,7 @@ export default function AgentView() {
         {agent && <div className='agent-detail' key={agent.uuid}>
         <div className='agent-info'>
             <h3>{agent.displayName}</h3>
-            <p>{agent.role && agent.role.displayName}</p>
+            <p className='agent-info-role'>{agent.role && agent.role.displayName}</p>
             <audio
                 controls
                 src={agent.voiceLine && agent.voiceLine.mediaList.map(elem => {

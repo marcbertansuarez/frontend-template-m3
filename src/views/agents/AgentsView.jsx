@@ -33,7 +33,7 @@ export default function AgentsView() {
             return (
                 <div className='agent' key={agent.uuid}>
                     <Link to={`/agents/${agent.uuid}`}>
-                    <img style={{width: "60px"}} src={agent.displayIconSmall} alt={agent.displayName} />
+                    <img src={agent.displayIconSmall} alt={agent.displayName} />
                     <h4>{agent.displayName}</h4>
                     </Link>
                 </div>
