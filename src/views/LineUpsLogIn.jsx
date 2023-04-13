@@ -101,6 +101,7 @@ export default function LineUpsLogIn() {
       </div>
       </div>}
       {isLoading && <Loading />}
+      <div className='lineup-view'>
       {lineups && !isLoading && lineups.map(elem => {
         return (
           <div className="lineup-card" key={elem._id}>
@@ -137,6 +138,7 @@ export default function LineUpsLogIn() {
           </div>
         )
       })}
+      </div>
       </div>
       {user && <div className='create'> <Link className='create-lineup' to={'/lineup/create'}><MdOutlineAddCircleOutline size={50} color='white' /></Link> </div>}
     </div>
