@@ -69,7 +69,7 @@ export default function Navbar() {
         <li><NavLink to="/maps" onClick={() => setNavbarOpen(false)}>Valorant Maps</NavLink></li>
         {isLoggedIn && <li><NavLink to="/profile" onClick={() => setNavbarOpen(false)}>Profile</NavLink></li>}
         {/* {isLoggedIn && <li><NavLink to="/private">Private view</NavLink></li>} */}
-        {isLoggedIn && <li><button onClick={() => {
+        {isLoggedIn && <li><button className='logout' onClick={() => {
           logOutUser() 
           setNavbarOpen(false)}}>Log out</button></li>}
         {/* <li><button onClick={() => navigate(-1)}>Go back</button></li> */}

@@ -63,8 +63,8 @@ export default function ProfileUser() {
       <Link className='user-name-link' to="/profile"><h3>{profile.username}</h3></Link>
       </div>
     </div>}
-    <div>
     {lineups.length === 0 && <div>No lineup's liked</div>}
+    <div className='lineup-view'>
     {lineups && !isLoading && lineups.map(elem => {
       return (
         <div className='lineup-card' key={elem._id}>

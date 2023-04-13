@@ -73,6 +73,7 @@ export default function LineUpsViewNoUser() {
         <button className='form-search-btn2' type="button" onClick={handleClearSearch}>Clear</button>
         </div>
       </form>
+      <div className='lineup-view'>
       {lineups && !isLoading && lineups.map(elem => {
         return (
           <div className="lineup-card" key={elem._id}>
@@ -104,6 +105,7 @@ export default function LineUpsViewNoUser() {
           </div>
         )
       })}
+      </div>
       </div>
       <div className='create'>
       <Link className='create-lineup' to={'/login'}><MdOutlineAddCircleOutline size={50} color='white' /></Link> 

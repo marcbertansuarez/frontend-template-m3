@@ -78,7 +78,7 @@ export default function ProfileView() {
       </div>
       </div>}
       
-      <div>
+      <div className='lineup-view'>
       {lineups && !isLoading && lineups.map(elem => {
         return (
           <div className='lineup-card' key={elem._id}>
