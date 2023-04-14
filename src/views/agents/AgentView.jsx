@@ -47,7 +47,7 @@ export default function AgentView() {
             <div className='agent-abilities'>
                 {agent.abilities && agent.abilities.map((abilitie) => {
                     return (
-                        <div className='abilitie'>
+                        <div key={abilitie.slot} className='abilitie'>
                             <h4>{abilitie.slot}</h4>
                             <h4>{abilitie.displayName}</h4>
                             <img src={abilitie.displayIcon} alt={abilitie.displayName} />

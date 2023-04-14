@@ -23,6 +23,7 @@ import MapsView from './views/maps/MapsView';
 import MapView from './views/maps/MapView';
 import LineUpsLogIn from './views/LineUpsLogIn';
 import LineUpsViewNoUser from './views/LineUpsViewNoUser';
+import RankingView from './views/RankingView';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/profile/liked" element={<ProfileLikedView />} />
         <Route path="/profile/edit" element={<ProfileEdit />} />
         <Route path="/profile/:userId" element={<ProfileUser />} />
+        <Route path="/ranking" element={<RankingView />} />
         <Route path="/tracker" element={<TrackerView />} />
         <Route path="/agents" element={<AgentsView />} />
         <Route path="/agents/:agentId" element={<AgentView />} />

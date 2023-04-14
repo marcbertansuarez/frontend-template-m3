@@ -44,8 +44,11 @@ deleteLineUp(id) {
 }
 
 searchLineUp(search) {
-  console.log('Calling searchLineUp service')
   return this.api.get(`/search?agent=${search}`).then(({ data }) => data).catch(err => console.error(err));
+}
+
+getRanking() {
+  return this.api.get('/ranking').then(({ data }) => data).catch(err => console.error(err));
 }
   
 }
