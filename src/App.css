@@ -179,10 +179,19 @@ body {
   margin-left: 25px;
 }
 
-.form-search {
-  margin-top: 10px;
-  margin-left: 25px;
-  margin-bottom: 20px;
+.form-search-general {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 25px;
+}
+
+.popularity-btn {
+  border: none;
+  background: transparent;
+  color: white;
+  opacity: 0.5;
 }
 
 .form-search-input {
@@ -318,7 +327,7 @@ body {
 .lineup-user-actions {
   display: flex;
   flex-direction: row;
-  margin-left: 210px;
+  margin-left: 230px;
   gap: 25px;
   margin-top: -10px;
   margin-bottom: 10px;
@@ -348,7 +357,7 @@ body {
 .lineup-info-details {
   display: flex;
   flex-direction: row;
-  gap: 180px;
+  gap: 160px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -1015,7 +1024,7 @@ p {
     font-size: 15px;
   }
   .map-details-info {
-    width: 350px; 
+    width: 350px;
   }
   .map-details-picture {
     width: 300px;

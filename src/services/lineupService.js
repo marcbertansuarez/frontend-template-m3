@@ -27,6 +27,10 @@ getLineUp(id) {
     return this.api.get(`/${id}`).then(({ data }) => data).catch(err => console.error(err));
 }
 
+getPopularity() {
+  return this.api.get('/popularity').then(({ data }) => data).catch(err => console.error(err));
+}
+
 createLineUp(body) {
     return this.api.post('/', body).then(({ data }) => data).catch(err => console.error(err));
   }

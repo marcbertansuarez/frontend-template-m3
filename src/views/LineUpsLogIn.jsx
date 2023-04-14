@@ -80,7 +80,19 @@ export default function LineUpsLogIn() {
     const handleClearSearch = async () => {
       setSearch('')
       getLineups();
-    }
+    };
+
+    const handleSubmitPopularity = async (e) => {
+      setIsLoading(true);
+      e.preventDefault();
+      try {
+        const response = await lineupService.getPopularity();
+        setLineups(response);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error)
+      }
+    };
 
     
   return (
@@ -88,7 +100,7 @@ export default function LineUpsLogIn() {
      <div>
      {!isLoading && <div>
       <h1 className='lineup-h1'>Find LineUps</h1>
-      <div>
+      <div className='form-search-general'>
       <form className="form-search" onSubmit={handleSubmitSearch}>
         <div className='form-search-input'>
         <div className='form-search-1'>
@@ -98,6 +110,9 @@ export default function LineUpsLogIn() {
         <button className='form-search-btn2' type="button" onClick={handleClearSearch}>Clear</button>
         </div>
       </form>
+        <form onSubmit={handleSubmitPopularity}>
+          <button className='popularity-btn' type='submit'>Filter by popularity</button>
+        </form>
       </div>
       </div>}
       {isLoading && <Loading />}
@@ -114,7 +129,7 @@ export default function LineUpsLogIn() {
             <img src={getMapImage(elem.map)} alt={elem.map} />
             <h4>{elem.map}</h4>
             </div>
-            <iframe src={`https://www.youtube.com/embed/${getYouTubeVideoId(
+            <iframe className='video-iframe' src={`https://www.youtube.com/embed/${getYouTubeVideoId(
                     elem.video
                   )}`}></iframe>
             <div className='lineup-info'>
