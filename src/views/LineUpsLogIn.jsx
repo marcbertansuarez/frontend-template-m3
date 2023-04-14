@@ -97,6 +97,7 @@ export default function LineUpsLogIn() {
     
   return (
     <div>
+    {isLoading && <Loading />}
      <div>
      {!isLoading && <div>
       <h1 className='lineup-h1'>Find LineUps</h1>
@@ -115,7 +116,6 @@ export default function LineUpsLogIn() {
         </form>
       </div>
       </div>}
-      {isLoading && <Loading />}
       <div className='lineup-view'>
       {lineups && !isLoading && lineups.map(elem => {
         return (

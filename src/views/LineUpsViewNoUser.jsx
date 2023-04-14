@@ -62,8 +62,10 @@ export default function LineUpsViewNoUser() {
   return (
     <div>
     {isLoading && <Loading />}
-      <h1 className='lineup-h1'>Find Lineups</h1>
-      <div>
+    <div>
+    {!isLoading && <div>
+      <h1 className='lineup-h1'>Find LineUps</h1>
+      <div className='form-search-general'>
       <form className="form-search" onSubmit={handleSubmitSearch}>
         <div className='form-search-input'>
         <div className='form-search-1'>
@@ -73,6 +75,8 @@ export default function LineUpsViewNoUser() {
         <button className='form-search-btn2' type="button" onClick={handleClearSearch}>Clear</button>
         </div>
       </form>
+      </div>
+      </div>}
       <div className='lineup-view'>
       {lineups && !isLoading && lineups.map(elem => {
         return (
