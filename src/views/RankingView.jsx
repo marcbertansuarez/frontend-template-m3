@@ -2,12 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import lineupService from '../services/lineupService';
 import getRankImage from '../utils/getRankImage.js';
 import { AuthContext } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 export default function RankingView() {
 
     const { user } = useContext(AuthContext);
     const [ranking, setRanking] = useState([]);
+    const navigate = useNavigate();
 
     const getRanking = async () => {
         const response = await lineupService.getRanking();
@@ -19,6 +21,8 @@ export default function RankingView() {
     }, []);  
 
     return (
+        <div>
+        <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
         <div className='ranking'>
         <h1>Ranking</h1>
         {ranking && ranking.map((elem, index) => {
@@ -33,6 +37,7 @@ export default function RankingView() {
                 </div>
             )
         })}
+        </div>
         </div>
     )
 }

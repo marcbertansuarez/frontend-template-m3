@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import profileService from '../../services/profileService';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
+import { IoMdArrowRoundBack } from 'react-icons/io';
+
 export default function ProfileEdit() {
     
 
@@ -63,6 +65,7 @@ export default function ProfileEdit() {
 
     return (
         <div className='general-form-edit'>
+        <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
         <div className='form-edit'>
         {isLoading && <Loading />}
             <h2>Editing {profile.username}</h2>

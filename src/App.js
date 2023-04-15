@@ -7,8 +7,6 @@ import ErrorPage from './views/ErrorPage';
 import NotFound from './views/NotFound';
 import Signup from './views/auth/Signup';
 import Login from './views/auth/Login';
-import PrivateView from './views/PrivateView';
-import IsPrivate from './components/IsPrivate';
 import LineUpDetails from './views/lineups/LineUpDetails';
 import LineUpEdit from './views/lineups/LineUpEdit';
 import NewLineUp from './views/lineups/NewLineUp';
@@ -49,7 +47,6 @@ function App() {
         <Route path="/maps/:mapId" element={<MapView />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

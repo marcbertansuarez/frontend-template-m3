@@ -10,6 +10,7 @@ import { AuthContext } from "../../context/AuthContext";
 import LineUpCard from "../../components/LineUpCard";
 import ReviewCard from "../../components/ReviewCard";
 import Loading from "../../components/Loading";
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 export default function LineUpDetails() {
   const { user } = useContext(AuthContext);
@@ -103,6 +104,7 @@ const handleSaveReview = async (reviewId, content) => {
 
   return (
     <div>
+    <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
       {isLoading && <Loading />}
       {lineup && !isLoading && (
         <div>

@@ -13,6 +13,7 @@ import { MdOutlineAddCircleOutline } from 'react-icons/md';
 import { ImEyePlus } from 'react-icons/im';
 import Loading from '../components/Loading';
 import { FaSearch } from 'react-icons/fa';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 export default function LineUpsViewNoUser() {
 
@@ -64,6 +65,7 @@ export default function LineUpsViewNoUser() {
     {isLoading && <Loading />}
     <div>
     {!isLoading && <div>
+      <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
       <h1 className='lineup-h1'>Find LineUps</h1>
       <div className='form-search-general'>
       <form className="form-search" onSubmit={handleSubmitSearch}>

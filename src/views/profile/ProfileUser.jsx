@@ -13,6 +13,7 @@ import getMapImage from '../../utils/getMapImage';
 import { ImEyePlus } from 'react-icons/im';
 import Loading from '../../components/Loading';
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 export default function ProfileUser() {
 
@@ -57,6 +58,7 @@ export default function ProfileUser() {
   return (
     <div className='profile-user'>
     {isLoading && <Loading />}
+    <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
     {profile && <div className='user'>
     <div className='user-1'>
     <img src={profile.image} alt={profile.username} />

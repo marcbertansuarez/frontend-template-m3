@@ -16,6 +16,7 @@ import { GrEdit } from 'react-icons/gr';
 import { ImEyePlus } from 'react-icons/im';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 export default function ProfileLikedView() {
 
@@ -67,6 +68,7 @@ export default function ProfileLikedView() {
   return (
     <div className='profile-user'>
       {isLoading && <Loading />}
+      <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
       {profile && <div className='user'>
       <div className='user-1'>
       <img src={profile.image} alt={profile.username} />

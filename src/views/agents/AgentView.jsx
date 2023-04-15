@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 export default function AgentView() {
 
     const { agentId } = useParams();
     const [agent, setAgent] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     const getAgent = async () => {
         try {
@@ -26,6 +28,8 @@ export default function AgentView() {
     
     
     return (
+        <div>
+        <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
         <div className='agents-general'>
         {isLoading && <Loading />}
         {agent && <div className='agent-detail' key={agent.uuid}>
@@ -56,6 +60,7 @@ export default function AgentView() {
                 })}
             </div>
         </div>}
+        </div>
         </div>
     
     )

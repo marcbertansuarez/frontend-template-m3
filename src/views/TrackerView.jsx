@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Loading from '../components/Loading';
+import { IoMdArrowRoundBack } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
 export default function TrackerView() {
 
@@ -9,6 +11,7 @@ export default function TrackerView() {
     const [player, setPlayer] = useState({});
     const [playerInfo, setPlayerInfo] = useState({});
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleChangeName = (e) => {
         setPlayerName(e.target.value)
@@ -34,6 +37,8 @@ export default function TrackerView() {
 
     
     return (
+        <div>
+        <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
         <div className='general-form-edit'>
         <h1>Tracker Players</h1>
         <div className='form-tracker'>
@@ -59,6 +64,7 @@ export default function TrackerView() {
             </div>
             <img className='tracker-img' src={player.data.card.large} alt={player.data.name} />
         </div>}
+        </div>
         </div>
     )
 }

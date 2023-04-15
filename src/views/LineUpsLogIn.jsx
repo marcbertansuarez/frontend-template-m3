@@ -16,6 +16,7 @@ import { RiDeleteBin5Line } from 'react-icons/ri';
 import { GrEdit } from 'react-icons/gr';
 import Loading from '../components/Loading';
 import { FaSearch } from 'react-icons/fa';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 export default function LineUpsLogIn() {
 
@@ -100,6 +101,7 @@ export default function LineUpsLogIn() {
     {isLoading && <Loading />}
      <div>
      {!isLoading && <div>
+     <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
       <h1 className='lineup-h1'>Find LineUps</h1>
       <div className='form-search-general'>
       <form className="form-search" onSubmit={handleSubmitSearch}>
