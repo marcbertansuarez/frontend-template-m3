@@ -1030,7 +1030,7 @@ p {
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: contain;
+    background-size: cover;
   }
   .form-search-1 input {
     width: 30vw;
