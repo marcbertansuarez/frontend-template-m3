@@ -160,6 +160,13 @@ p {
   border: none; 
 }
 
+.password-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 31px;
+}
+
 .lineup-h1 {
   margin-left: 25px;
 }

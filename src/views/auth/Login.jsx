@@ -3,6 +3,8 @@ import toast from 'react-hot-toast';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate, Link } from 'react-router-dom';
 import authService from '../../services/authService';
+import { AiOutlineEye } from 'react-icons/ai';
+import { AiOutlineEyeInvisible } from 'react-icons/ai';
 
 export default function Login() {
   const { storeToken, authenticateUser, isLoggedIn } = useAuth(); 
@@ -12,6 +14,7 @@ export default function Login() {
   });
   const [errorMessage, setErrorMessage] = useState(undefined);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setUser(prev => {
@@ -47,13 +50,23 @@ export default function Login() {
     // eslint-disable-next-line
   }, [isLoggedIn])
 
+  const handlePassword = () => {
+   setShowPassword(!showPassword)
+  }
+
   return (
     <div className='new-lineup'>
       <form onSubmit={handleSubmit}>
         <label>Username or Email</label>
         <input required type="text" name="usernameOrEmail" value={user.usernameOrEmail} onChange={handleChange} />
         <label>Password</label>
-        <input required type="password" name="password" value={user.password} onChange={handleChange} />
+        <div className='password-div'>
+        <input required type={showPassword ? "text" : "password"} name="password" value={user.password} onChange={handleChange} />
+        {showPassword ? (
+          <AiOutlineEye onClick={handlePassword} size={"30px"}/> ) : (
+            <AiOutlineEyeInvisible onClick={handlePassword} size={"30px"}/>
+        )}
+        </div>
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         <button type="submit">Log in </button>
       </form>
