@@ -92,9 +92,11 @@ export default function LineUpsViewNoUser() {
             <img src={getMapImage(elem.map)} alt={elem.map} />
             <h4>{elem.map}</h4>
             </div>
-            <iframe src={`https://www.youtube.com/embed/${getYouTubeVideoId(
+            <div className='iframe-container'>
+            <iframe className='video-iframe' src={`https://www.youtube.com/embed/${getYouTubeVideoId(
                     elem.video
-                  )}`}></iframe>
+                  )}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowFullScreen></iframe>
+                  </div>
             <div className='lineup-info'>
             <Link className='lineup-user' to={user ? `/profile/${elem.author._id}` : '/login' }>
             <img src={elem.author.image} alt={elem.author.username} />

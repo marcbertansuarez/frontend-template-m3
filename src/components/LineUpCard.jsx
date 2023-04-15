@@ -25,11 +25,11 @@ export default function LineUpCard({lineup, handleDeleteLineup, handleLikes}) {
             <img src={getMapImage(lineup.map)} alt={lineup.map} />
             <h4>{lineup.map}</h4>
             </div>
-          <iframe
-            src={`https://www.youtube.com/embed/${getYouTubeVideoId(
-              lineup.video
-            )}`}
-          ></iframe>
+            <div className='iframe-container'>
+            <iframe className='video-iframe' src={`https://www.youtube.com/embed/${getYouTubeVideoId(
+                    lineup.video
+                  )}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowFullScreen></iframe>
+                  </div>
           <div className='lineup-info-details'>
           {lineup.author && (
             <Link className='lineup-user' to={user ? `/profile/${lineup.author._id}` : '/login' }>
