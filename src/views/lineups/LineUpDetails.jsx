@@ -11,6 +11,7 @@ import LineUpCard from "../../components/LineUpCard";
 import ReviewCard from "../../components/ReviewCard";
 import Loading from "../../components/Loading";
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import ErrorPage from "../ErrorPage";
 
 export default function LineUpDetails() {
   const { user } = useContext(AuthContext);
@@ -23,6 +24,7 @@ export default function LineUpDetails() {
   const [newReview, setNewReview] = useState(initialState);
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate();
+  const [error, setError] = useState(false);
 
   const getOneLineup = async () => {
     try {
@@ -32,6 +34,8 @@ export default function LineUpDetails() {
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setError(true);
+      setIsLoading(false);
     }
   };
   
@@ -46,6 +50,7 @@ export default function LineUpDetails() {
       navigate(user ? '/lineup' : '/lineups')
     } catch (error) {
       console.log(error)
+      setError(true);
     }
   }
 
@@ -58,6 +63,7 @@ export default function LineUpDetails() {
       getOneLineup();
     } catch (error) {
       console.log(error)
+      setError(true);
     }
   };
 
@@ -67,6 +73,7 @@ export default function LineUpDetails() {
       getOneLineup();
     } catch (error) {
       console.log(error)
+      setError(true);
     }
   }
 
@@ -84,6 +91,7 @@ const handleReviewSubmit = async (e) => {
     setNewReview(initialState)
   } catch (error) {
     console.log(error)
+    setError(true);
   }
 }
 
@@ -98,7 +106,8 @@ const handleSaveReview = async (reviewId, content) => {
       })
     })
   } catch (error) {
-    
+    console.log(error);
+    setError(true);
   }
 }
 
@@ -106,6 +115,7 @@ const handleSaveReview = async (reviewId, content) => {
     <div>
     <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
       {isLoading && <Loading />}
+      {error && <ErrorPage />}
       {lineup && !isLoading && (
         <div>
           <LineUpCard key={lineup._id} lineup={lineup} handleDeleteLineup={handleDeleteLineup} handleLikes={handleLikes}/>

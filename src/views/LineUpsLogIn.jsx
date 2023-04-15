@@ -17,6 +17,7 @@ import { GrEdit } from 'react-icons/gr';
 import Loading from '../components/Loading';
 import { FaSearch } from 'react-icons/fa';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import ErrorPage from '../views/ErrorPage';
 
 export default function LineUpsLogIn() {
 
@@ -25,6 +26,7 @@ export default function LineUpsLogIn() {
   const [lineups, setLineups] = useState([]);
   const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   
   const getLineups = async () => {
@@ -34,6 +36,8 @@ export default function LineUpsLogIn() {
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setError(true);
+      setIsLoading(false);
     }
   }
 
@@ -50,6 +54,8 @@ export default function LineUpsLogIn() {
         getLineups();
       } catch (error) {
         console.log(error)
+        setError(true);
+        setIsLoading(false);
       }
     };
 
@@ -59,6 +65,8 @@ export default function LineUpsLogIn() {
         setLineups(lineups.filter(lineup => lineup._id !== lineupId));
       } catch (error) {
         console.log(error)
+        setError(true);
+        setIsLoading(false);
       }
     };
 
@@ -75,23 +83,29 @@ export default function LineUpsLogIn() {
         setIsLoading(false);
       } catch (error) {
         console.log(error)
+        setError(true)
+        setIsLoading(false);
       }
     };
 
     const handleClearSearch = async () => {
-      setSearch('')
-      getLineups();
+      try {
+        setSearch('')
+        getLineups();
+      } catch (error) {
+        console.log(error);
+        setError(true);
+      }
     };
 
     const handleSubmitPopularity = async (e) => {
-      setIsLoading(true);
       e.preventDefault();
       try {
         const response = await lineupService.getPopularity();
         setLineups(response);
-        setIsLoading(false);
       } catch (error) {
         console.log(error)
+        setError(true);
       }
     };
 
@@ -99,6 +113,7 @@ export default function LineUpsLogIn() {
   return (
     <div>
     {isLoading && <Loading />}
+    {error && <ErrorPage />}
      <div>
      {!isLoading && <div>
      <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>

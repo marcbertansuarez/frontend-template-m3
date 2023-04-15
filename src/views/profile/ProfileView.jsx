@@ -17,6 +17,7 @@ import { RiDeleteBin5Line } from 'react-icons/ri';
 import { GrEdit } from 'react-icons/gr';
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import ErrorPage from '../ErrorPage';
 
 export default function ProfileView() {
 
@@ -25,6 +26,7 @@ export default function ProfileView() {
   const [profile, setProfile] = useState({});
   const [lineups, setLineups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   
   const getProfile = async () => {
@@ -35,6 +37,8 @@ export default function ProfileView() {
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setError(true);
+      setIsLoading(false);
     }
   }
   
@@ -52,15 +56,20 @@ export default function ProfileView() {
         getProfile();
       } catch (error) {
         console.log(error)
+        setError(true);
       }
     };
 
     const handleDelete = async (lineupId) => {
+      setIsLoading(true);
       try {
         await lineupService.deleteLineUp(lineupId);
         setLineups(lineups.filter(lineup => lineup._id !== lineupId));
+        setIsLoading(false);
       } catch (error) {
-        console.log(error)
+        console.log(error);
+        setError(true);
+        setIsLoading(false);
       }
     }
 
@@ -69,6 +78,7 @@ export default function ProfileView() {
     <div className='profile-user'>
     <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
       {isLoading && <Loading />}
+      {error && <ErrorPage />}
       {profile && <div className='user'>
       <div className='user-1'>
       <img src={profile.image} alt={profile.username} />

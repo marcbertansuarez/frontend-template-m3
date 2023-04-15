@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom'
 import Loading from '../../components/Loading';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import ErrorPage from '../ErrorPage';
 
 export default function MapView() {
 
@@ -10,6 +11,7 @@ export default function MapView() {
     const [map, setMap] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+    const [error, setError] = useState(false);
 
     const getMap = async () => {
         try {
@@ -18,6 +20,8 @@ export default function MapView() {
             setIsLoading(false)
         } catch (error) {
             console.log(error)
+            setError(true);
+            setIsLoading(false);
         }
     }
 
@@ -32,6 +36,7 @@ export default function MapView() {
         <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
         <div className='map-details'>
         {isLoading && <Loading />}
+        {error && <ErrorPage />}
         {map && <div className='map-details-info'>
             <h2>{map.displayName}</h2>
             <img className='map-details-picture' src={map.listViewIcon} alt={map.displayName} />

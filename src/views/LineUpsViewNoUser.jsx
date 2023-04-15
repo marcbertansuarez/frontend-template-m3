@@ -14,6 +14,7 @@ import { ImEyePlus } from 'react-icons/im';
 import Loading from '../components/Loading';
 import { FaSearch } from 'react-icons/fa';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import ErrorPage from './ErrorPage';
 
 export default function LineUpsViewNoUser() {
 
@@ -22,6 +23,7 @@ export default function LineUpsViewNoUser() {
   const [lineups, setLineups] = useState([]);
   const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   
   const getLineups = async () => {
@@ -31,6 +33,8 @@ export default function LineUpsViewNoUser() {
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setError(true);
+      setIsLoading(false);
     }
   }
 
@@ -51,18 +55,26 @@ export default function LineUpsViewNoUser() {
         setIsLoading(false);
       } catch (error) {
         console.log(error)
+        setError(true);
+        setIsLoading(false);
       }
     };
 
     const handleClearSearch = async () => {
-      setSearch('')
-      getLineups();
+      try {
+        setSearch('')
+        getLineups();
+      } catch (error) {
+        console.log(error)
+        setError(true)
+      } 
     }
 
     
   return (
     <div>
     {isLoading && <Loading />}
+    {error && <ErrorPage />}
     <div>
     {!isLoading && <div>
       <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>

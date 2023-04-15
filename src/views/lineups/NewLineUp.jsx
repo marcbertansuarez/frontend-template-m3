@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import lineupService from '../../services/lineupService';
+import ErrorPage from '../ErrorPage';
 
 export default function NewLineUp() {
 
@@ -13,6 +14,7 @@ export default function NewLineUp() {
     }
 
     const [newLineup, setNewLineup] = useState(initalState);
+    const [error, setError] = useState(false);
 
     const agents = ['Astra', 'Breach', 'Brimstone', 'Chamber', 'Cypher', 'Fade', 'Guekko', 'Harbor', 'Jett', 'KAY/O', 'Killjoy', 'Neon', 'Omen', 'Phoenix', 'Raze', 'Reyna', 'Sage', 'Skye', 'Sova', 'Viper', 'Yoru'];
     const maps = ['Bind', 'Haven', 'Split', 'Ascent', 'Icebox', 'Breeze', 'Fracture', 'Pearl', 'Lotus']
@@ -36,6 +38,7 @@ export default function NewLineUp() {
             navigate(`/lineup/${createdLineup._id}`)
         } catch (error) {
             console.log(error)
+            setError(true);
         }
     };
 
@@ -43,6 +46,7 @@ export default function NewLineUp() {
     return (
         <div className='new-lineup'>
             <h2>Create new LineUp</h2>
+            {error && <ErrorPage />}
             <form onSubmit={handleSubmit}>
                 <label>Title</label>
                 <input type="text" name="title" value={newLineup.title} onChange={handleChange}/>

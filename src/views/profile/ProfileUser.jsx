@@ -14,6 +14,7 @@ import { ImEyePlus } from 'react-icons/im';
 import Loading from '../../components/Loading';
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import ErrorPage from '../ErrorPage';
 
 export default function ProfileUser() {
 
@@ -23,6 +24,7 @@ export default function ProfileUser() {
   const [profile, setProfile] = useState({});
   const [lineups, setLineups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   
   const getProfileUser = async () => {
@@ -33,6 +35,8 @@ export default function ProfileUser() {
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setError(true);
+      setIsLoading(false);
     }
   }
   
@@ -41,7 +45,7 @@ export default function ProfileUser() {
       getProfileUser()
       // eslint-disable-next-line
     }, [userId]) 
-
+    
     const handleLikes = async (lineupId) => {
       if (!user) {
         navigate('/login');
@@ -51,6 +55,7 @@ export default function ProfileUser() {
         getProfileUser();
       } catch (error) {
         console.log(error)
+        setError(true);
       }
     };
 
@@ -58,6 +63,7 @@ export default function ProfileUser() {
   return (
     <div className='profile-user'>
     {isLoading && <Loading />}
+    {error && <ErrorPage />}
     <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
     {profile && <div className='user'>
     <div className='user-1'>

@@ -3,6 +3,7 @@ import profileService from '../../services/profileService';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import ErrorPage from '../ErrorPage';
 
 export default function ProfileEdit() {
     
@@ -13,6 +14,7 @@ export default function ProfileEdit() {
     })
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+    const [error, setError] = useState(false);
 
     const getProfile = async () => {
         try {
@@ -21,6 +23,8 @@ export default function ProfileEdit() {
             setIsLoading(false);
         } catch (error) {
             console.log(error);
+            setError(true);
+            setIsLoading(false);
         }
     }
 
@@ -60,6 +64,7 @@ export default function ProfileEdit() {
             navigate('/profile');
         } catch (error) {
             console.log(error)
+            setError(true);
         }
     }
 
@@ -68,6 +73,7 @@ export default function ProfileEdit() {
         <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
         <div className='form-edit'>
         {isLoading && <Loading />}
+        {error && <ErrorPage />}
             <h2>Editing {profile.username}</h2>
             <form className='form-edit-form' onSubmit={handleSubmit} encType="multipart/form-data">
                 <label>Update username</label>

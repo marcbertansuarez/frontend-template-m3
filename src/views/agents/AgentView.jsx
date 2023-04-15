@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import ErrorPage from '../ErrorPage';
 
 export default function AgentView() {
 
@@ -10,6 +11,7 @@ export default function AgentView() {
     const [agent, setAgent] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+    const [error, setError] = useState(false);
 
     const getAgent = async () => {
         try {
@@ -18,6 +20,8 @@ export default function AgentView() {
             setIsLoading(false)
         } catch (error) {
             console.log(error)
+            setError(true);
+            setIsLoading(false);
         }
     }
 
@@ -32,6 +36,7 @@ export default function AgentView() {
         <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
         <div className='agents-general'>
         {isLoading && <Loading />}
+        {error && <ErrorPage />}
         {agent && <div className='agent-detail' key={agent.uuid}>
         <div className='agent-info'>
             <h3>{agent.displayName}</h3>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import lineupService from '../../services/lineupService';
+import Loading from '../../components/Loading';
+import ErrorPage from '../ErrorPage';
 
 export default function LineUpEdit() {
 
@@ -18,13 +20,18 @@ export default function LineUpEdit() {
     const maps = ['Bind', 'Haven', 'Split', 'Ascent', 'Icebox', 'Breeze', 'Fracture', 'Pearl', 'Lotus']
 
     const navigate = useNavigate();
+    const [error, setError] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const getLineup = async () => {
         try {
             const response = await lineupService.getLineUp(lineupId);
             setLineup(response.lineupLike);
+            setIsLoading(false);
         } catch (error) {
             console.log(error);
+            setError(true);
+            setIsLoading(false);
         }
     } 
 
@@ -49,12 +56,15 @@ export default function LineUpEdit() {
             navigate(`/lineup/${lineupId}`)
         } catch (error) {
             console.log(error)
+            setError(true);
         }
     };
 
 
     return (
         <div className='new-lineup'>
+        {isLoading && <Loading />}
+        {error && <ErrorPage />}
         {lineup && <div> 
             <h2>Editing {lineup.title}</h2>
             <form onSubmit={handleSubmit}>

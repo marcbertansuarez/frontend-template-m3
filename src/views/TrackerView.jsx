@@ -3,6 +3,7 @@ import axios from 'axios';
 import Loading from '../components/Loading';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
+import ErrorPage from './ErrorPage';
 
 export default function TrackerView() {
 
@@ -12,6 +13,7 @@ export default function TrackerView() {
     const [playerInfo, setPlayerInfo] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const [error, setError] = useState(false);
 
     const handleChangeName = (e) => {
         setPlayerName(e.target.value)
@@ -32,6 +34,8 @@ export default function TrackerView() {
             setIsLoading(false)
         } catch (error) {
             console.log(error)
+            setError(true);
+            setIsLoading(false);
         }
     };
 
@@ -55,6 +59,7 @@ export default function TrackerView() {
             </form>
         </div>
         {isLoading && <Loading />}
+        {error && <ErrorPage />}
         {player && playerInfo.data && <div className='tracker-info'>
             <h3>{player.data.name} {player.data.tag}</h3>
             <div className='tracker-info-1'>
