@@ -1029,7 +1029,7 @@ p {
     background-image: url("./images/caf018c47475e82da279e02101b989cb.png");
     background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
     background-size: cover;
   }
   .form-search-1 input {
