@@ -1029,8 +1029,8 @@ p {
     background-image: url("./images/caf018c47475e82da279e02101b989cb.png");
     background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-size: cover;
+    background-attachment: fixed;
+    background-size: contain;
   }
   .form-search-1 input {
     width: 30vw;
