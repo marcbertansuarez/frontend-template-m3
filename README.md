@@ -5,7 +5,7 @@
 This application is called ValoVision. It's an app created for Valorant players. Valorant is one of the most played shooter games in the world. On the app you can discover different strategies for all the agents of the game, track real players to see their rank and get general info of the game such as all the agents and maps.
 
 > Add a picture (logo, design, actual screen, gif, etc, whichever you prefer.)
-![Logo](images/logo%20ok.png)
+![Logo](images/logo.png)
 
 ---
 ## Instructions
