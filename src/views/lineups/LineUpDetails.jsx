@@ -10,7 +10,7 @@ import { AuthContext } from "../../context/AuthContext";
 import LineUpCard from "../../components/LineUpCard";
 import ReviewCard from "../../components/ReviewCard";
 import Loading from "../../components/Loading";
-import { IoMdArrowRoundBack } from 'react-icons/io';
+import { IoMdArrowRoundBack } from "react-icons/io";
 import ErrorPage from "../ErrorPage";
 
 export default function LineUpDetails() {
@@ -19,10 +19,10 @@ export default function LineUpDetails() {
   const [lineup, setLineup] = useState({});
   const [reviews, setReviews] = useState([]);
   const initialState = {
-    content: ''
-  }
+    content: "",
+  };
   const [newReview, setNewReview] = useState(initialState);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [error, setError] = useState(false);
 
@@ -38,7 +38,7 @@ export default function LineUpDetails() {
       setIsLoading(false);
     }
   };
-  
+
   useEffect(() => {
     getOneLineup();
     // eslint-disable-next-line
@@ -47,22 +47,22 @@ export default function LineUpDetails() {
   const handleDeleteLineup = async (lineupId) => {
     try {
       await lineupService.deleteLineUp(lineupId);
-      navigate(user ? '/lineup' : '/lineups')
+      navigate(user ? "/lineup" : "/lineups");
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setError(true);
     }
-  }
+  };
 
   const handleLikes = async (lineupId) => {
     if (!user) {
-      navigate('/login');
+      navigate("/login");
     }
     try {
       await likeService.createLike(lineupId);
       getOneLineup();
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setError(true);
     }
   };
@@ -72,72 +72,91 @@ export default function LineUpDetails() {
       await reviewService.deleteReview(reviewId);
       getOneLineup();
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setError(true);
     }
-  }
+  };
 
   const handleNewReview = (e) => {
     setNewReview({
-          [e.target.name]: e.target.value
-  })
-};
+      [e.target.name]: e.target.value,
+    });
+  };
 
-const handleReviewSubmit = async (e) => {
-  e.preventDefault()
-  try {
-    await reviewService.createReview(lineupId, newReview);
-    getOneLineup();
-    setNewReview(initialState)
-  } catch (error) {
-    console.log(error)
-    setError(true);
-  }
-}
+  const handleReviewSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await reviewService.createReview(lineupId, newReview);
+      getOneLineup();
+      setNewReview(initialState);
+    } catch (error) {
+      console.log(error);
+      setError(true);
+    }
+  };
 
-const handleSaveReview = async (reviewId, content) => {
-  try {
-    await reviewService.editReview(reviewId, content);
-    setReviews((prev) => {
-      return prev.map((review) => {
-        return (
-          review._id === reviewId ? {...review, content: content} : review
-        )
-      })
-    })
-  } catch (error) {
-    console.log(error);
-    setError(true);
-  }
-}
+  const handleSaveReview = async (reviewId, content) => {
+    try {
+      await reviewService.editReview(reviewId, content);
+      setReviews((prev) => {
+        return prev.map((review) => {
+          return review._id === reviewId
+            ? { ...review, content: content }
+            : review;
+        });
+      });
+    } catch (error) {
+      console.log(error);
+      setError(true);
+    }
+  };
 
   return (
     <div>
-    <button className="goback-btn" onClick={() => navigate(-1) }><IoMdArrowRoundBack size={30} color='white'/></button>
+      <button className="goback-btn" onClick={() => navigate(-1)}>
+        <IoMdArrowRoundBack size={30} color="white" />
+      </button>
       {isLoading && <Loading />}
       {error && <ErrorPage />}
       {lineup && !isLoading && (
         <div>
-          <LineUpCard key={lineup._id} lineup={lineup} handleDeleteLineup={handleDeleteLineup} handleLikes={handleLikes}/>
+          <LineUpCard
+            key={lineup._id}
+            lineup={lineup}
+            handleDeleteLineup={handleDeleteLineup}
+            handleLikes={handleLikes}
+          />
         </div>
       )}
       <div className="review">
-      <div className="reviews">
-      {reviews.length === 0 && lineup && !isLoading && <div>No reviews for this post yet</div>}
-        {reviews &&
-          reviews.map((review) => {
-            return (
-              <ReviewCard key={review._id} review={review} handleDeleteReview={handleDeleteReview} handleSaveReview={handleSaveReview}/>
-            );
-          })}
-          </div>
-          {user && lineup && !isLoading &&
-        <form className="new-review" onSubmit={handleReviewSubmit}>
-          <label>Add a new review</label>
-          <input type="text" name="content" value={newReview.content} onChange={handleNewReview}/>
-          <button type="submit">New review</button>
-        </form>
-      }
+        <div className="reviews">
+          {reviews.length === 0 && lineup && !isLoading && (
+            <div>No reviews for this post yet</div>
+          )}
+          {reviews &&
+            reviews.map((review) => {
+              return (
+                <ReviewCard
+                  key={review._id}
+                  review={review}
+                  handleDeleteReview={handleDeleteReview}
+                  handleSaveReview={handleSaveReview}
+                />
+              );
+            })}
+        </div>
+        {user && lineup && !isLoading && (
+          <form className="new-review" onSubmit={handleReviewSubmit}>
+            <label>Add a new review</label>
+            <input
+              type="text"
+              name="content"
+              value={newReview.content}
+              onChange={handleNewReview}
+            />
+            <button type="submit">New review</button>
+          </form>
+        )}
       </div>
     </div>
   );
